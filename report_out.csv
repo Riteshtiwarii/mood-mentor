@@ -1,0 +1,9 @@
+ID,Input Text,Processed Text,Sentiment,Compound,Pos,Neu,Neg
+1,Our sprint planning was efficient and the team resolved all critical blockers effectively.,sprint planning efficient team resolved critical blockers effectively,Positive,0.6249,0.396,0.481,0.123
+2,Dealing with repeated system outages without adequate tools is causing extreme burnout.,dealing repeated system outages without adequate tools causing extreme burnout,Negative,-0.1695,0.0,0.868,0.132
+3,The campaign performance metrics were presented during the weekly review call.,campaign performance metrics presented weekly review call,Neutral,0.0,0.0,1.0,0.0
+4,I truly appreciate the wellness stipend and recognition program initiated this quarter.,truly appreciate wellness stipend recognition program initiated quarter,Positive,0.8176,0.515,0.485,0.0
+5,The revised quota targets are completely unrealistic and causing high stress across our team.,revised quota targets completely unrealistic causing high stress across team,Negative,-0.4215,0.0,0.823,0.177
+6,We evaluated three analytics platforms and documented their functional specifications.,evaluated three analytics platforms documented functional specifications,Neutral,0.0,0.0,1.0,0.0
+7,"This is not the worst refactoring task, but it definitely lacks adequate automated testing.",not worst refactoring task definitely lacks adequate automated testing,Positive,0.7933,0.422,0.578,0.0
+8,I never receive timely assistance from the infrastructure support group.,never receive timely assistance infrastructure support group,Positive,0.4019,0.252,0.748,0.0
