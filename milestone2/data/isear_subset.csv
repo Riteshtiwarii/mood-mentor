@@ -1,0 +1,27 @@
+text,label,joy,sadness,anger,fear,surprise,disgust
+"When I passed my driving test on the first try after practicing for weeks.",joy,1,0,0,0,0,0
+"When I was reunited with my family after being away in another country for two years.",joy,1,0,0,0,0,0
+"When I was informed that I was accepted into my dream university program.",joy,1,0,0,0,0,0
+"When my close friend recovered completely from a life-threatening illness.",joy,1,0,0,0,0,0
+"When my grandfather passed away after suffering for several months.",sadness,0,1,0,0,0,0
+"When my long-term relationship ended and I felt completely isolated and lonely.",sadness,0,1,0,0,0,0
+"When I received a rejection letter from the company I worked so hard to join.",sadness,0,1,0,0,0,0
+"When I had to put my elderly pet down because she was in continuous pain.",sadness,0,1,0,0,0,0
+"When someone cut in front of me in line and rudely insulted me when I spoke up.",anger,0,0,1,0,0,0
+"When a colleague took credit for three months of my independent research in a meeting.",anger,0,0,1,0,0,0
+"When my car was vandalized in the parking lot and the security refused to review cameras.",anger,0,0,1,0,0,0
+"When I discovered that someone I trusted had been spreading false malicious rumors about me.",anger,0,0,1,0,0,0
+"When I was walking alone at night and heard footsteps following closely behind me.",fear,0,0,0,1,0,0
+"When the airplane hit severe violent turbulence and the oxygen masks dropped.",fear,0,0,0,1,0,0
+"When the doctor called me back for an urgent re-examination following lab tests.",fear,0,0,0,1,0,0
+"When I lost control of my car on an icy highway and spun across lanes.",fear,0,0,0,1,0,0
+"When I saw a person mistreating a defenseless animal on the street.",disgust,0,0,0,0,0,1
+"When I found dead maggots and rotten spoiled meat in the restaurant salad.",disgust,0,0,0,0,0,1
+"When I stepped into a public restroom covered in filthy human waste and vomit.",disgust,0,0,0,0,0,1
+"When an acquaintance made a repulsive, vulgar, and predatory remark in public.",disgust,0,0,0,0,0,1
+"When my old childhood friend suddenly knocked on my door from halfway across the world.",surprise,0,0,0,0,1,0
+"When the lottery ticket numbers matched and I won the grand prize unexpectedly.",surprise,0,0,0,0,1,0
+"When the lightning struck a tree just ten feet away from where I was standing.",surprise,0,0,0,0,1,0
+"When I walked into a dark room and all my friends jumped out shouting happy birthday.",surprise,0,0,0,0,1,0
+"When I was offered the leadership position but felt intense dread about managing the crisis.",joy,1,0,0,1,0,0
+"When the manager insulted the staff in a disgusting and enraging manner.",anger,0,0,1,0,0,1

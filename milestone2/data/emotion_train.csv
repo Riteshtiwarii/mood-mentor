@@ -1,0 +1,53 @@
+text,joy,sadness,anger,fear,surprise,disgust
+"I am thrilled and delighted with the outstanding team promotion today!",1,0,0,0,0,0
+"We celebrated our successful project launch with immense pride and happiness.",1,0,0,0,0,0
+"I feel so grateful and blessed to have such inspiring and caring colleagues.",1,0,0,0,0,0
+"Our team won the prestigious annual innovation award and we are overjoyed!",1,0,0,0,0,0
+"I am deeply depressed and heartbroken by the sudden termination of my teammate.",0,1,0,0,0,0
+"Feeling completely lonely, hopeless, and down about my current career trajectory.",0,1,0,0,0,0
+"It was a sorrowful day saying goodbye to our mentor who passed away.",0,1,0,0,0,0
+"I feel helpless and miserable under this oppressive and bleak working atmosphere.",0,1,0,0,0,0
+"I am absolutely furious with management for blatantly lying to our face.",0,0,1,0,0,0
+"This constant micromanagement is enraging and makes my blood boil with anger.",0,0,1,0,0,0
+"It is infuriating how credit for my hard work was stolen by the supervisor.",0,0,1,0,0,0
+"I am outraged by the unfair disciplinary action taken against the whistleblower.",0,0,1,0,0,0
+"I am terrified of losing my job in the upcoming massive corporate layoffs.",0,0,0,1,0,0
+"Feeling intense anxiety, panic, and dread before giving the executive presentation.",0,0,0,1,0,0
+"I am scared that our security vulnerability has already exposed customer data.",0,0,0,1,0,0
+"The sudden loss of our major client makes me fearful about our company's survival.",0,0,0,1,0,0
+"I was astonished and completely amazed when I received the unexpected bonus!",0,0,0,0,1,0
+"What an astonishing turn of events, none of us expected this sudden breakthrough!",0,0,0,0,1,0
+"I was genuinely surprised to hear the announcement during the all-hands meeting.",0,0,0,0,1,0
+"It was a jaw-dropping revelation that the CEO decided to step down immediately.",0,0,0,0,1,0
+"The rotten spoiled food in the office pantry was sickening and disgusting.",0,0,0,0,0,1
+"I am utterly repulsed and disgusted by the toxic behavior in the executive suite.",0,0,0,0,0,1
+"The unsanitary working conditions in the warehouse are vile and nauseating.",0,0,0,0,0,1
+"His vulgar and inappropriate comments during lunch were totally revolting.",0,0,0,0,0,1
+"I am excited about the new opportunity but nervous about the outcome.",1,0,0,1,0,0
+"I am delighted to start the project but terrified of the tight timeline.",1,0,0,1,0,0
+"Thrilled about the promotion but anxious about the immense responsibility.",1,0,0,1,0,0
+"I am furious and disgusted with the leadership decisions regarding diversity.",0,0,1,0,0,1
+"His hateful outburst was infuriating and sickening to everyone present.",0,0,1,0,0,1
+"I am mad and completely repulsed by the corruption happening in finance.",0,0,1,0,0,1
+"I was completely stunned and thrilled when they announced my promotion!",1,0,0,0,1,0
+"What a wonderful and unexpected surprise to receive the company grant!",1,0,0,0,1,0
+"I was amazed and overjoyed to find out our team ranked number one globally!",1,0,0,0,1,0
+"It breaks my heart and makes me deeply angry that we were laid off without notice.",0,1,1,0,0,0
+"I am devastated and outraged by the blatant breach of employee trust.",0,1,1,0,0,0
+"I feel crushed and furious that our completed project was abruptly scrapped.",0,1,1,0,0,0
+"I was shocked and horrified to learn about the catastrophic factory accident.",0,0,0,1,1,0
+"The sudden earthquake alert startled everyone and created severe panic.",0,0,0,1,1,0
+"I was bewildered and alarmed by the abrupt security lockdown notice.",0,0,0,1,1,0
+"The quarterly status meeting was held on Tuesday at 10:00 AM.",0,0,0,0,0,0
+"The server maintenance window is scheduled for Saturday midnight.",0,0,0,0,0,0
+"We updated the project documentation according to standard company guidelines.",0,0,0,0,0,0
+"The financial report was submitted to the accounting department.",0,0,0,0,0,0
+"I love the collaborative environment and feel energized by our team's success!",1,0,0,0,0,0
+"Nothing is working properly, I feel so tired, discouraged, and tearful.",0,1,0,0,0,0
+"How dare they blame the junior engineer for an executive architectural failure!",0,0,1,0,0,0
+"My heart was pounding with dread as the performance review invite arrived.",0,0,0,1,0,0
+"I never expected our small hackathon project to win the grand international prize!",1,0,0,0,1,0
+"Seeing rotten mold inside the cafeteria refrigerator made me want to vomit.",0,0,0,0,0,1
+"I am enthusiastic about the new role but apprehensive about relocation.",1,0,0,1,0,0
+"It is disheartening and maddening to watch our genuine efforts get dismissed.",0,1,1,0,0,0
+"The dishonest cover-up by management is shameful, vile, and makes me boil with rage.",0,0,1,0,0,1

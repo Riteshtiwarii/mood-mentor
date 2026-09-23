@@ -1,0 +1,19 @@
+text,joy,sadness,anger,fear,surprise,disgust
+"I am cheerful and completely happy with my annual performance appraisal.",1,0,0,0,0,0
+"I am crying in grief over the terrible loss of a trusted coworker.",0,1,0,0,0,0
+"I am enraged by the disrespectful treatment received from the client.",0,0,1,0,0,0
+"I am frightened that the company will shut down operations this quarter.",0,0,0,1,0,0
+"I was startled by the unexpected loud explosion in the industrial lab.",0,0,0,0,1,0
+"The filthy, roach-infested kitchen in the breakroom is utterly disgusting.",0,0,0,0,0,1
+"I am eager to lead the project but worried about failing our stakeholders.",1,0,0,1,0,0
+"I am furious and revolted by the corrupt cover-up by senior executives.",0,0,1,0,0,1
+"I was stunned and overjoyed to see my research paper accepted at top conference!",1,0,0,0,1,0
+"It makes me deeply sad and resentful that our loyalty was rewarded with job cuts.",0,1,1,0,0,0
+"The weekly sprint review meeting started at 11:00 AM as scheduled.",0,0,0,0,0,0
+"The engineering team closed four bug tickets and merged two pull requests.",0,0,0,0,0,0
+"I feel confident, proud, and ecstatic about our product release today!",1,0,0,0,0,0
+"The heavy feeling of despair and sorrow makes it hard to focus at work.",0,1,0,0,0,0
+"I am trembling with fear as the emergency alarm sounded through the building.",0,0,0,1,0,0
+"Finding out that the bonus was double what was promised was an incredible shock!",1,0,0,0,1,0
+"The foul smell emanating from the chemical leak was sickening and repulsive.",0,0,0,0,0,1
+"I am provoked and aggravated by the constant public humiliation from my manager.",0,0,1,0,0,0
