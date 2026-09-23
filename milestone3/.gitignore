@@ -1,0 +1,15 @@
+# Python virtual environments & caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Large model binaries & checkpoints (>100MB GitHub limit)
+*.bin
+*.safetensors
+*.pt
+models/**/pytorch_model.bin
+models/**/model.safetensors
+
+# OS files
+.DS_Store
