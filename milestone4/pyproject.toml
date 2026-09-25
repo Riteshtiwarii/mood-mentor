@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "moodmentor"
+version = "4.0.0"
+authors = [
+  { name="Ritesh Tiwari", email="riteshtiwari@example.com" },
+]
+description = "Mood Mentor — Enterprise AI Psychological Wellness Platform"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+dependencies = [
+    "streamlit>=1.28.0",
+    "plotly>=5.17.0",
+    "pandas>=2.0.0",
+    "pytest>=7.4.0"
+]
+
+[project.scripts]
+moodmentor = "moodmentor.cli:main"
