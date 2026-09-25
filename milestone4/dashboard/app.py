@@ -40,16 +40,18 @@ st.set_page_config(
 )
 
 # -----------------------------------------------------------------------------
-# 2. Modern Full-Stack Web Developer Design System (Tailwind / Linear.app Aesthetic)
+# 2. Modern Full-Stack Enterprise Design System (Linear / Modern Health / Stripe Caliber)
 # -----------------------------------------------------------------------------
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    
+    * { box-sizing: border-box; }
     
     html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
         color: #0F172A;
-        background-color: #F8FAFC;
+        background-color: #F8FAFC !important;
     }
     
     #MainMenu, footer, header { visibility: hidden !important; }
@@ -61,17 +63,15 @@ st.markdown("""
 
     /* Top Glass Navbar */
     .top-navbar {
-        background: rgba(255, 255, 255, 0.90);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(226, 232, 240, 0.9);
-        border-radius: 16px;
-        padding: 14px 24px;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 14px;
+        padding: 14px 22px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 22px;
-        box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     }
     .nav-brand {
         display: flex;
@@ -79,34 +79,35 @@ st.markdown("""
         gap: 12px;
     }
     .brand-mark {
-        background: linear-gradient(135deg, #0F766E 0%, #0284C7 100%);
+        background: linear-gradient(135deg, #0F766E 0%, #0369A1 100%);
         color: white;
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 800;
-        font-size: 1.2rem;
-        box-shadow: 0 4px 10px rgba(15, 118, 110, 0.3);
+        font-size: 1.15rem;
+        box-shadow: 0 2px 8px rgba(15, 118, 110, 0.25);
     }
     .brand-text-name {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
         font-weight: 800;
         color: #0F172A;
         letter-spacing: -0.02em;
     }
     .brand-text-badge {
-        background: #F1F5F9;
-        color: #475569;
-        font-size: 0.70rem;
+        background: #CCFBF1;
+        color: #0F766E;
+        font-size: 0.68rem;
         font-weight: 700;
-        padding: 3px 8px;
-        border-radius: 6px;
+        padding: 2px 8px;
+        border-radius: 5px;
         margin-left: 6px;
         letter-spacing: 0.04em;
         text-transform: uppercase;
+        border: 1px solid #99F6E4;
     }
     .nav-stats-pill {
         background: #F8FAFC;
@@ -131,24 +132,23 @@ st.markdown("""
 
     /* Hero Greeting Section */
     .hero-banner {
-        background: linear-gradient(145deg, #FFFFFF 0%, #F1F5F9 100%);
+        background: #FFFFFF;
         border: 1px solid #E2E8F0;
-        border-radius: 18px;
-        padding: 24px 30px;
-        margin-bottom: 22px;
-        position: relative;
-        box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.03);
+        border-radius: 14px;
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
     }
     .hero-greeting {
-        font-size: 1.55rem;
+        font-size: 1.45rem;
         font-weight: 800;
         color: #0F172A;
-        letter-spacing: -0.03em;
+        letter-spacing: -0.02em;
         margin-bottom: 4px;
     }
     .hero-desc {
         color: #64748B;
-        font-size: 0.92rem;
+        font-size: 0.88rem;
         line-height: 1.5;
         margin: 0;
     }
@@ -157,51 +157,51 @@ st.markdown("""
     .bento-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        margin-bottom: 22px;
+        gap: 14px;
+        margin-bottom: 20px;
     }
     .bento-card {
         background: #FFFFFF;
         border: 1px solid #E2E8F0;
-        border-radius: 16px;
-        padding: 20px 22px;
-        transition: all 0.2s ease;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        border-radius: 12px;
+        padding: 18px 20px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+        transition: transform 0.15s ease, border-color 0.15s ease;
     }
     .bento-card:hover {
-        transform: translateY(-2px);
+        transform: translateY(-1px);
         border-color: #CBD5E1;
-        box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.06);
+        box-shadow: 0 6px 14px -3px rgba(15, 23, 42, 0.05);
     }
     .bento-card-top {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
     .bento-label {
         color: #64748B;
-        font-size: 0.76rem;
+        font-size: 0.72rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
     }
     .bento-val {
-        font-size: 1.95rem;
+        font-size: 1.85rem;
         font-weight: 800;
         color: #0F172A;
         line-height: 1.1;
         letter-spacing: -0.03em;
     }
     .bento-tag {
-        font-size: 0.75rem;
+        font-size: 0.74rem;
         font-weight: 600;
         margin-top: 8px;
         display: inline-flex;
         align-items: center;
         gap: 4px;
-        padding: 2px 8px;
-        border-radius: 6px;
+        padding: 2px 7px;
+        border-radius: 5px;
     }
     .tag-teal { background: #CCFBF1; color: #0F766E; }
     .tag-blue { background: #E0F2FE; color: #0284C7; }
@@ -210,9 +210,9 @@ st.markdown("""
 
     /* Segmented Control Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        background: #F1F5F9 !important;
+        background: #ECEFF3 !important;
         border-radius: 12px !important;
-        padding: 4px !important;
+        padding: 5px !important;
         gap: 4px !important;
         border: 1px solid #E2E8F0 !important;
         margin-bottom: 22px !important;
@@ -220,8 +220,8 @@ st.markdown("""
     .stTabs [data-baseweb="tab"] {
         border-radius: 8px !important;
         font-weight: 600 !important;
-        font-size: 0.88rem !important;
-        color: #64748B !important;
+        font-size: 0.86rem !important;
+        color: #475569 !important;
         padding: 8px 16px !important;
         border: none !important;
         transition: all 0.15s ease !important;
@@ -231,48 +231,159 @@ st.markdown("""
         background: #FFFFFF !important;
         color: #0F172A !important;
         font-weight: 700 !important;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08) !important;
     }
     .stTabs [data-baseweb="tab-highlight"] { display: none !important; }
 
-    /* Form Inputs & Buttons */
+    /* Form Inputs & Preset Buttons */
     .stTextArea textarea {
-        border-radius: 12px !important;
+        border-radius: 10px !important;
         border: 1px solid #CBD5E1 !important;
         padding: 12px 16px !important;
-        font-size: 0.95rem !important;
+        font-size: 0.92rem !important;
+        background: #FFFFFF !important;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
     }
     .stTextArea textarea:focus {
         border-color: #0F766E !important;
         box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15) !important;
     }
-    .stButton>button {
-        border-radius: 10px !important;
+    div[data-testid="column"] .stButton > button {
+        border-radius: 9px !important;
         font-weight: 600 !important;
-        font-size: 0.88rem !important;
-        padding: 8px 18px !important;
+        font-size: 0.82rem !important;
+        padding: 8px 14px !important;
+        background: #FFFFFF !important;
+        border: 1px solid #CBD5E1 !important;
+        color: #334155 !important;
         transition: all 0.15s ease !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
     }
-    .stButton>button[kind="primary"] {
+    div[data-testid="column"] .stButton > button:hover {
+        border-color: #0F766E !important;
+        color: #0F766E !important;
+        background: #F0FDF4 !important;
+    }
+    button[kind="primary"] {
         background: linear-gradient(135deg, #0F766E 0%, #0D9488 100%) !important;
+        color: white !important;
+        font-weight: 700 !important;
         border: none !important;
-        box-shadow: 0 4px 14px rgba(15, 118, 110, 0.25) !important;
+        box-shadow: 0 3px 12px rgba(15, 118, 110, 0.25) !important;
+    }
+    button[kind="primary"]:hover {
+        background: linear-gradient(135deg, #115E59 0%, #0F766E 100%) !important;
+        box-shadow: 0 5px 16px rgba(15, 118, 110, 0.35) !important;
     }
 
-    /* Recommendation Item Card */
+    /* Clinical Diagnostic Assessment Card */
+    .clinical-diag-card {
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 14px;
+        padding: 20px 22px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+    }
+    .diag-title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #F1F5F9;
+        margin-bottom: 12px;
+    }
+    .diag-title {
+        font-size: 0.96rem;
+        font-weight: 700;
+        color: #0F172A;
+        letter-spacing: -0.01em;
+    }
+    .diag-live-tag {
+        font-size: 0.70rem;
+        font-weight: 700;
+        color: #047857;
+        background: #ECFDF5;
+        border: 1px solid #A7F3D0;
+        padding: 2px 7px;
+        border-radius: 4px;
+        text-transform: uppercase;
+    }
+    .diag-metric-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 9px 0;
+        border-bottom: 1px solid #F8FAFC;
+    }
+    .diag-label {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #64748B;
+    }
+    .diag-val-affect {
+        font-size: 0.98rem;
+        font-weight: 800;
+        color: #0F172A;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+    }
+    .diag-intensity-box {
+        text-align: right;
+    }
+    .diag-intensity-num {
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: #0F766E;
+    }
+    .diag-tier-badge {
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-left: 4px;
+        background: #E0F2FE;
+        color: #0369A1;
+    }
+    .diag-triage-badge {
+        font-size: 0.78rem;
+        font-weight: 800;
+        padding: 3px 8px;
+        border-radius: 5px;
+    }
+    .triage-mild { background: #DCFCE7; color: #166534; }
+    .triage-moderate { background: #E0F2FE; color: #0369A1; }
+    .triage-high { background: #FEF3C7; color: #92400E; }
+    .triage-critical { background: #FEE2E2; color: #991B1B; }
+
+    .meter-container {
+        width: 130px;
+        height: 6px;
+        background: #E2E8F0;
+        border-radius: 9999px;
+        overflow: hidden;
+        margin-top: 4px;
+    }
+    .meter-fill {
+        height: 100%;
+        border-radius: 9999px;
+        background: linear-gradient(90deg, #10B981 0%, #F59E0B 60%, #EF4444 100%);
+    }
+
+    /* Enterprise Clinical Prescription Card */
     .saas-rec-card {
         background: #FFFFFF;
         border: 1px solid #E2E8F0;
-        border-radius: 16px;
-        padding: 20px 24px;
-        margin-bottom: 16px;
-        transition: all 0.2s ease;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        border-left: 4px solid #0F766E;
+        border-radius: 12px;
+        padding: 18px 22px;
+        margin-bottom: 14px;
+        transition: all 0.15s ease;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
     }
     .saas-rec-card:hover {
         border-color: #0F766E;
-        box-shadow: 0 10px 25px -4px rgba(15, 118, 110, 0.08);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px -4px rgba(15, 118, 110, 0.08);
     }
     .rec-top-row {
         display: flex;
@@ -281,7 +392,7 @@ st.markdown("""
         margin-bottom: 8px;
     }
     .rec-title-text {
-        font-size: 1.15rem;
+        font-size: 1.05rem;
         font-weight: 700;
         color: #0F172A;
     }
@@ -289,18 +400,18 @@ st.markdown("""
         background: #F0FDF4;
         color: #15803D;
         border: 1px solid #BBF7D0;
-        padding: 3px 12px;
+        padding: 2px 10px;
         border-radius: 9999px;
-        font-size: 0.80rem;
+        font-size: 0.76rem;
         font-weight: 700;
     }
     .meta-tag {
         display: inline-flex;
         align-items: center;
         gap: 4px;
-        padding: 3px 9px;
-        border-radius: 6px;
-        font-size: 0.72rem;
+        padding: 2px 8px;
+        border-radius: 5px;
+        font-size: 0.70rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.03em;
@@ -312,14 +423,24 @@ st.markdown("""
     .tag-journaling { background: #FFFBEB; color: #B45309; border: 1px solid #FEF3C7; }
     .tag-movement { background: #FFF1F2; color: #BE123C; border: 1px solid #FFE4E6; }
 
+    .clinical-box {
+        font-size: 0.80rem;
+        color: #475569;
+        background: #F8FAFC;
+        padding: 9px 12px;
+        border-radius: 6px;
+        border: 1px solid #E2E8F0;
+        margin-top: 8px;
+    }
+
     /* Crisis Safety Callout */
     .crisis-card {
         background: #FFF1F2;
         border: 1px solid #FECDD3;
-        border-left: 6px solid #E11D48;
-        border-radius: 14px;
-        padding: 20px 24px;
-        margin-bottom: 24px;
+        border-left: 5px solid #E11D48;
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin-bottom: 20px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -420,7 +541,7 @@ stats = db.get_database_stats()
 st.markdown(f"""
 <div class="top-navbar">
     <div class="nav-brand">
-        <div class="brand-mark">M</div>
+        <div class="brand-mark">🧠</div>
         <div>
             <span class="brand-text-name">MoodMentor</span>
             <span class="brand-text-badge">v4.0 Enterprise</span>
@@ -429,8 +550,8 @@ st.markdown(f"""
     <div style="display: flex; align-items: center; gap: 14px;">
         <div class="nav-stats-pill">
             <span class="pulsing-live-dot"></span>
-            <span>Production ML Pipeline</span>
-            <span style="color: #94A3B8;">|</span>
+            <span>DistilBERT & VADER Live</span>
+            <span style="color: #CBD5E1;">|</span>
             <span style="color: #0F172A; font-weight: 700;">{stats['total_interactions']} Telemetry Logs</span>
         </div>
         <div style="background: #0F172A; color: white; padding: 6px 14px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em;">
@@ -463,7 +584,7 @@ st.markdown(f"""
     <div class="bento-card">
         <div class="bento-card-top">
             <span class="bento-label">Total Check-ins</span>
-            <div style="font-size: 1.1rem;">📊</div>
+            <div style="font-size: 1.05rem;">📊</div>
         </div>
         <div class="bento-val">{len(user_history)}</div>
         <div class="bento-tag tag-teal">↑ 100% telemetry synced</div>
@@ -471,15 +592,15 @@ st.markdown(f"""
     <div class="bento-card">
         <div class="bento-card-top">
             <span class="bento-label">Dominant Affect</span>
-            <div style="font-size: 1.1rem;">🌱</div>
+            <div style="font-size: 1.05rem;">🌱</div>
         </div>
-        <div class="bento-val" style="font-size: 1.85rem;">{dominant}</div>
+        <div class="bento-val" style="font-size: 1.80rem;">{dominant}</div>
         <div class="bento-tag tag-blue">Latest emotional trend</div>
     </div>
     <div class="bento-card">
         <div class="bento-card-top">
             <span class="bento-label">Burnout Risk Index</span>
-            <div style="font-size: 1.1rem;">⚡</div>
+            <div style="font-size: 1.05rem;">⚡</div>
         </div>
         <div class="bento-val" style="color: {burnout_color};">{burnout_score}%</div>
         <div class="bento-tag" style="background: #FEF2F2; color: {burnout_color}; font-weight: 700;">{burnout_label}</div>
@@ -487,7 +608,7 @@ st.markdown(f"""
     <div class="bento-card">
         <div class="bento-card-top">
             <span class="bento-label">Interventions Rated</span>
-            <div style="font-size: 1.1rem;">⭐</div>
+            <div style="font-size: 1.05rem;">⭐</div>
         </div>
         <div class="bento-val">{feedback_count}</div>
         <div class="bento-tag tag-emerald">Continuous online learning</div>
@@ -595,37 +716,45 @@ with tab_copilot:
                     st.progress(v, text=f"{k.capitalize()}: {v*100:.1f}%")
 
         with col_view2:
+            triage_cls = res['state'].triage_level.lower()
+            intensity_pct = min(100, max(5, int(res['state'].intensity_score * 100)))
             st.markdown(f"""
-            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 22px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9;">
-                    <span style="color: #64748B; font-weight: 600;">Dominant Affect:</span>
-                    <span style="font-size: 1.15rem; font-weight: 800; color: #0F172A; text-transform: uppercase;">
-                        {res['state'].primary_emotion} ({res['state'].confidence * 100:.1f}%)
+            <div class="clinical-diag-card">
+                <div class="diag-title-row">
+                    <span class="diag-title">Clinical Diagnostic Assessment</span>
+                    <span class="diag-live-tag">Live Neural Telemetry</span>
+                </div>
+                <div class="diag-metric-item">
+                    <span class="diag-label">Dominant Affect:</span>
+                    <span class="diag-val-affect">
+                        {res['state'].primary_emotion} <span style="font-size: 0.82rem; font-weight: 600; color: #64748B;">({res['state'].confidence * 100:.1f}%)</span>
                     </span>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F1F5F9;">
-                    <span style="color: #64748B; font-weight: 600;">Continuous Intensity:</span>
-                    <span style="font-size: 1.05rem; font-weight: 800; color: #0F766E;">
-                        {res['state'].intensity_score:.2f} / 1.00 <span style="font-size: 0.8rem; font-weight: 600; color: #64748B;">({res['state'].tier} Tier)</span>
-                    </span>
+                <div class="diag-metric-item">
+                    <span class="diag-label">Continuous Intensity:</span>
+                    <div class="diag-intensity-box">
+                        <span class="diag-intensity-num">{res['state'].intensity_score:.2f} / 1.00</span>
+                        <span class="diag-tier-badge">{res['state'].tier} Tier</span>
+                        <div class="meter-container"><div class="meter-fill" style="width: {intensity_pct}%;"></div></div>
+                    </div>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F1F5F9;">
-                    <span style="color: #64748B; font-weight: 600;">Clinical Severity Triage:</span>
-                    <span style="background: #FEF3C7; color: #92400E; font-weight: 800; padding: 3px 10px; border-radius: 6px; font-size: 0.85rem;">
+                <div class="diag-metric-item">
+                    <span class="diag-label">Clinical Severity Triage:</span>
+                    <span class="diag-triage-badge triage-{triage_cls}">
                         {res['state'].triage_level}
                     </span>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F1F5F9;">
-                    <span style="color: #64748B; font-weight: 600;">VADER Polarity:</span>
-                    <span style="font-weight: 700; color: #0284C7; font-size: 0.95rem;">
+                <div class="diag-metric-item">
+                    <span class="diag-label">VADER Baseline Polarity:</span>
+                    <span style="font-weight: 700; color: #0284C7; font-size: 0.90rem;">
                         {res.get('meta', {}).get('sentiment_scores', {}).get('compound', 0.0):+.2f} Compound
                     </span>
                 </div>
-                <div style="padding-top: 12px; font-size: 0.84rem; color: #475569;">
+                <div style="padding-top: 10px; font-size: 0.80rem; color: #475569; border-top: 1px solid #F1F5F9; margin-top: 8px;">
                     <b>Affective Synergy:</b> {res['state'].mixed_state or "Unipolar coherent state detected."}
                 </div>
-                <div style="padding-top: 6px; font-size: 0.78rem; color: #64748B;">
-                    ⚡ <b>Inference Engine:</b> {res.get('meta', {}).get('model_used', 'DistilBERT Transformer')}
+                <div style="padding-top: 4px; font-size: 0.74rem; color: #64748B;">
+                    ⚡ <b>Inference Backbone:</b> {res.get('meta', {}).get('model_used', 'DistilBERT Transformer')}
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -640,13 +769,13 @@ with tab_copilot:
                     <span class="rec-title-text">{i+1}. {r_dict['title']}</span>
                     <span class="fit-score-pill">Fit Score: {r_dict['score'] * 100:.1f}%</span>
                 </div>
-                <div style="margin-bottom: 12px;">
+                <div style="margin-bottom: 8px;">
                     <span class="meta-tag {mod_tag}">{r_dict['modality']}</span>
                     <span style="font-size: 0.78rem; color: #64748B; font-weight: 600;">⏱️ {r_dict['duration_mins']} mins duration</span>
                 </div>
-                <p style="color: #334155; font-size: 0.94rem; margin: 0 0 10px 0; line-height: 1.55;">{r_dict['description']}</p>
-                <div style="font-size: 0.82rem; color: #64748B; background: #F8FAFC; padding: 8px 12px; border-radius: 8px; border: 1px solid #E2E8F0;">
-                    <b>Clinical Mechanism:</b> {r_dict['clinical_rationale']}
+                <p style="color: #334155; font-size: 0.90rem; margin: 0 0 8px 0; line-height: 1.5;">{r_dict['description']}</p>
+                <div class="clinical-box">
+                    <b>Clinical Protocol Mechanism:</b> {r_dict['clinical_rationale']}
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -683,9 +812,9 @@ with tab_trends:
                 st.caption("Distribution available with Plotly.")
 
         st.markdown(f"""
-        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 20px; margin-top: 14px;">
-            <h4 style="font-size: 1rem; font-weight: 700; color: #0F172A; margin: 0 0 8px 0;">Executive Clinical Synthesis:</h4>
-            <p style="color: #475569; font-size: 0.9rem; line-height: 1.5; margin: 0;">
+        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 20px; margin-top: 14px; box-shadow: 0 1px 3px rgba(15,23,42,0.02);">
+            <h4 style="font-size: 0.98rem; font-weight: 700; color: #0F172A; margin: 0 0 6px 0;">Executive Clinical Synthesis</h4>
+            <p style="color: #475569; font-size: 0.88rem; line-height: 1.5; margin: 0;">
                 Current Burnout Index stands at <b>{burnout_score}% ({burnout_label})</b>. Over the last 14 days, emotional intensity shows positive stabilization following somatic grounding practices. Recommending a routine 4-minute box breathing session prior to high-stakes sprint meetings.
             </p>
         </div>
@@ -777,9 +906,9 @@ with tab_reports:
     col_rep1, col_rep2 = st.columns(2)
     with col_rep1:
         st.markdown("""
-        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px;">
-            <div style="font-size: 1.05rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">📊 Raw Tabular Telemetry (CSV)</div>
-            <p style="color: #64748B; font-size: 0.85rem; margin: 0 0 16px 0;">Complete database extraction including timestamps, VADER polarity, intensity tiers, and raw tokens.</p>
+        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px; box-shadow: 0 1px 3px rgba(15,23,42,0.02);">
+            <div style="font-size: 1.02rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">📊 Raw Tabular Telemetry (CSV)</div>
+            <p style="color: #64748B; font-size: 0.84rem; margin: 0 0 16px 0;">Complete database extraction including timestamps, VADER polarity, intensity tiers, and raw tokens.</p>
         </div>
         """, unsafe_allow_html=True)
         if st.button("Generate & Download CSV File", type="primary", use_container_width=True):
@@ -796,9 +925,9 @@ with tab_reports:
 
     with col_rep2:
         st.markdown("""
-        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px;">
-            <div style="font-size: 1.05rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">📄 Executive Summary Report (PDF)</div>
-            <p style="color: #64748B; font-size: 0.85rem; margin: 0 0 16px 0;">Publication-ready PDF featuring executive metrics, recent check-in timelines, and evidence-based prescriptions.</p>
+        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px; box-shadow: 0 1px 3px rgba(15,23,42,0.02);">
+            <div style="font-size: 1.02rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">📄 Executive Summary Report (PDF)</div>
+            <p style="color: #64748B; font-size: 0.84rem; margin: 0 0 16px 0;">Publication-ready PDF featuring executive metrics, recent check-in timelines, and evidence-based prescriptions.</p>
         </div>
         """, unsafe_allow_html=True)
         if st.button("Generate Executive PDF Report", use_container_width=True):
