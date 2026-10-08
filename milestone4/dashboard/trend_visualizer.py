@@ -228,7 +228,7 @@ def calculate_burnout_risk_index(interactions: List[Dict[str, Any]]) -> Tuple[in
     if score < 35:
         return score, "Low Risk (Healthy)", "#10B981"
     elif score < 65:
-        return score, "Moderate Risk (Managed)", "#0284C7"
+        return score, "Moderate Risk (Needs Attention)", "#0284C7"
     elif score < 85:
         return score, "Elevated Burnout Risk", "#F59E0B"
     else:
