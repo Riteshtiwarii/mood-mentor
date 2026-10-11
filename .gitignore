@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+*.db
+telemetry_report.csv
+telemetry_report.pdf
