@@ -1,0 +1,10 @@
+# Ignore model weights and caches
+*.bin
+*.safetensors
+*.pt
+*.onnx
+__pycache__/
+*.pyc
+.pytest_cache/
+evaluation_report.json
+dataset_cache/
