@@ -27,7 +27,7 @@ active_user = render_sidebar_context()
 
 # Database & telemetry
 db = DatabaseManager()
-history = db.get_user_history(active_user, limit=30)
+history = db.get_user_interactions(active_user, limit=30)
 
 # If database has no history, provide rich initial telemetry for demo
 if not history:
@@ -46,14 +46,15 @@ if not history:
         db.save_interaction(
             user_id=active_user,
             raw_text=f"Sample wellness telemetry entry {idx + 1}",
-            sanitized_text=f"Sample wellness telemetry entry {idx + 1}",
             primary_emotion=emo,
+            confidence=0.92,
             intensity_score=score,
+            tier="Moderate",
             triage_level=triage,
-            emotion_distribution={emo: score, "joy": 0.2, "sadness": 0.1},
+            vader_compound=0.1,
             timestamp=ts
         )
-    history = db.get_user_history(active_user, limit=30)
+    history = db.get_user_interactions(active_user, limit=30)
 
 # Top KPI Metric Strip
 burnout_score, burnout_label, burnout_color = calculate_burnout_risk_index(history)

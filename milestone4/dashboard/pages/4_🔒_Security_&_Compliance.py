@@ -51,7 +51,7 @@ with sec_col1:
     )
 
     if user_test_input:
-        sanitized_res = sec.scrub_pii(user_test_input)
+        sanitized_res, _ = sec.anonymize_pii(user_test_input)
         is_clean = (sanitized_res != user_test_input)
         
         st.markdown("<p style='font-size:12px; font-weight:700; color:#475569; margin:10px 0 4px 0;'>Sanitized Output (Ready for Neural Pipeline):</p>", unsafe_allow_html=True)
@@ -71,7 +71,7 @@ with sec_col2:
         <p style="margin:0 0 14px 0; font-size:12px; color:#64748B;">Execute cryptographic purge of all employee records pursuant to Article 17 GDPR</p>
     """, unsafe_allow_html=True)
 
-    records_count = len(db.get_user_history(active_user, limit=500))
+    records_count = len(db.get_user_interactions(active_user, limit=500))
     st.markdown(f"""
     <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:12px; margin-bottom:14px; font-size:12.5px;">
         Target Account: <b>{active_user}</b><br>
@@ -82,7 +82,8 @@ with sec_col2:
 
     purge_confirm = st.checkbox("Confirm irreversible account erasure request")
     if st.button("🗑️ Execute Right to be Forgotten Purge", type="secondary", disabled=not purge_confirm, use_container_width=True):
-        deleted = db.delete_user_data(active_user)
+        deleted_dict = db.purge_user_data(active_user)
+        deleted = deleted_dict.get("interactions_deleted", 0)
         st.warning(f"Purge Executed: {deleted} interaction records permanently purged from telemetry database.")
         st.rerun()
 

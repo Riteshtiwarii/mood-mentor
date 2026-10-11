@@ -31,7 +31,7 @@ active_user = render_sidebar_context()
 
 exporter = ReportExporter()
 db = DatabaseManager()
-history = db.get_user_history(active_user, limit=50)
+history = db.get_user_interactions(active_user, limit=50)
 
 st.markdown("""
 <div class="enterprise-card">

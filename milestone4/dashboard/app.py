@@ -407,7 +407,7 @@ if "Copilot" in active_tab:
 
         # Execute Pipeline
         with st.spinner("Analyzing affective vectors and clinical triage..."):
-            sanitized_text = sec.scrub_pii(input_text)
+            sanitized_text, _ = sec.anonymize_pii(input_text)
             emotions, compound, meta = pipeline.analyze(sanitized_text)
             state = analyzer.analyze(sanitized_text, emotions, compound)
             primary_emo = state.primary_emotion
@@ -429,11 +429,12 @@ if "Copilot" in active_tab:
             db.save_interaction(
                 user_id=active_user,
                 raw_text=input_text,
-                sanitized_text=sanitized_text,
                 primary_emotion=primary_emo,
+                confidence=confidence,
                 intensity_score=intensity,
+                tier=state.tier,
                 triage_level=triage,
-                emotion_distribution=emotions
+                vader_compound=compound
             )
 
         # Render Recommendations on Left Column
@@ -545,7 +546,7 @@ if "Copilot" in active_tab:
 # VIEW 2: LONGITUDINAL ANALYTICS & BURNOUT METER
 # =============================================================================
 elif "Analytics" in active_tab:
-    history = db.get_user_history(active_user, limit=30)
+    history = db.get_user_interactions(active_user, limit=30)
     burnout_score, burnout_label, burnout_color = calculate_burnout_risk_index(history)
 
     kpi1, kpi2, kpi3 = st.columns(3)
@@ -702,7 +703,7 @@ elif "Security" in active_tab:
         height=85
     )
     if test_input:
-        masked = sec.scrub_pii(test_input)
+        masked, _ = sec.anonymize_pii(test_input)
         st.markdown("<p style='font-size:12px; font-weight:700; color:#475569; margin:10px 0 4px 0;'>Sanitized Output (Ready for Neural Pipeline):</p>", unsafe_allow_html=True)
         st.code(masked, language="text")
         if masked != test_input:
