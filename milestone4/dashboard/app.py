@@ -303,14 +303,15 @@ def load_platform_services():
     db = DatabaseManager()
     sec = SecurityManager()
     pipe = UnifiedEmotionPipeline()
+    analyzer = IntensityAnalyzer()
     cat = WellnessCatalog()
-    engine = RecommendationEngine(catalog=cat, db_manager=db)
-    learner = FeedbackLearner(db_manager=db)
+    engine = RecommendationEngine(catalog=cat)
+    learner = FeedbackLearner()
     search_eng = FilterEngine()
     exporter = ReportExporter()
-    return db, sec, pipe, cat, engine, learner, search_eng, exporter
+    return db, sec, pipe, analyzer, cat, engine, learner, search_eng, exporter
 
-db, sec, pipeline, catalog, rec_engine, feedback_learner, search_engine, exporter = load_platform_services()
+db, sec, pipeline, analyzer, catalog, rec_engine, feedback_learner, search_engine, exporter = load_platform_services()
 
 # -----------------------------------------------------------------------------
 # 4. Hero Topbar
@@ -406,21 +407,33 @@ if "Copilot" in active_tab:
 
         # Execute Pipeline
         with st.spinner("Analyzing affective vectors and clinical triage..."):
-            pipeline_result = pipeline.analyze(input_text, user_id=active_user)
-            emotions = pipeline_result["emotions"]
-            primary_emo = pipeline_result["primary_emotion"]
-            intensity = pipeline_result["intensity_score"]
-            triage = pipeline_result["triage_level"]
-            confidence = pipeline_result.get("confidence", 0.94)
+            sanitized_text = sec.scrub_pii(input_text)
+            emotions, compound, meta = pipeline.analyze(sanitized_text)
+            state = analyzer.analyze(sanitized_text, emotions, compound)
+            primary_emo = state.primary_emotion
+            intensity = state.intensity_score
+            triage = state.triage_level
+            confidence = state.confidence
 
-            # Recommendations
-            recommendations = rec_engine.recommend(
-                user_id=active_user,
-                emotions=emotions,
-                intensity=intensity,
-                triage_level=triage,
-                text=input_text,
+            # Build Profile and Recommendations
+            profile = UserProfile(active_user)
+            recommendations = rec_engine.get_recommendations(
+                state=state,
+                emotion_probs=emotions,
+                user_profile=profile,
+                query_text=sanitized_text,
                 top_k=3
+            )
+
+            # Persist to SQLite
+            db.save_interaction(
+                user_id=active_user,
+                raw_text=input_text,
+                sanitized_text=sanitized_text,
+                primary_emotion=primary_emo,
+                intensity_score=intensity,
+                triage_level=triage,
+                emotion_distribution=emotions
             )
 
         # Render Recommendations on Left Column
@@ -430,9 +443,10 @@ if "Copilot" in active_tab:
         """, unsafe_allow_html=True)
 
         for rank, rec in enumerate(recommendations, 1):
-            modality = rec.get("modality", "Grounding").upper()
-            duration = rec.get("duration_minutes", 5)
-            match_pct = int(rec.get("composite_score", 0.88) * 100)
+            act = rec.activity
+            modality = act.modality.upper()
+            duration = act.duration_mins
+            match_pct = int(rec.score * 100)
 
             st.markdown(f"""
             <div class="action-card">
@@ -441,28 +455,28 @@ if "Copilot" in active_tab:
                         <span class="badge-rank">RANK #{rank}</span>
                         <span class="badge-modality">{modality}</span>
                         <span class="badge-match">{match_pct}% Match</span>
-                        <h4 style="margin:8px 0 4px 0; font-size:16px; font-weight:800; color:#0F172A;">{rec.get('title')}</h4>
+                        <h4 style="margin:8px 0 4px 0; font-size:16px; font-weight:800; color:#0F172A;">{act.title}</h4>
                     </div>
                     <span style="font-size:12px; font-weight:600; color:#64748B;">⏱️ {duration} min</span>
                 </div>
-                <p style="margin:0 0 12px 0; font-size:13px; color:#475569; line-height:1.5;">{rec.get('description')}</p>
+                <p style="margin:0 0 12px 0; font-size:13px; color:#475569; line-height:1.5;">{act.description}</p>
             </div>
             """, unsafe_allow_html=True)
 
             with st.expander(f"🔍 Explainable AI (XAI) Insight for Rank #{rank}"):
                 st.markdown(f"""
                 - **Primary Trigger:** High `{primary_emo}` affect vector ({emotions.get(primary_emo, 0):.1%})
-                - **Clinical Rationale:** Selected to rapidly reduce physiological arousal via parasympathetic activation.
+                - **Clinical Rationale:** {act.clinical_rationale}
                 - **Target Intensity Range:** Calibrated for intensity **{intensity:.2f}** ({triage} tier).
                 """)
                 fb_c1, fb_c2 = st.columns([1, 1])
                 with fb_c1:
-                    if st.button(f"👍 Accept & Log ({rec.get('title')[:15]}...)", key=f"acc_{rank}"):
-                        feedback_learner.record_feedback(active_user, rec.get("activity_id", "act_01"), "accepted", rating=5.0)
+                    if st.button(f"👍 Accept & Log ({act.title[:15]}...)", key=f"acc_{rank}"):
+                        feedback_learner.record_feedback(profile, act.id, act.modality, "accepted", rating=5.0)
                         st.success("Feedback logged! AI profile adapted.")
                 with fb_c2:
                     if st.button(f"⏭️ Skip Activity", key=f"skp_{rank}"):
-                        feedback_learner.record_feedback(active_user, rec.get("activity_id", "act_01"), "skipped", rating=2.0)
+                        feedback_learner.record_feedback(profile, act.id, act.modality, "skipped", rating=2.0)
                         st.info("Skipped. Penalty applied to prevent repetition.")
 
         st.markdown("</div>", unsafe_allow_html=True)
