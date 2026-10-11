@@ -106,4 +106,3 @@ def search_telemetry(
         rows = connection.execute(query, parameters).fetchall()
 
     return [dict(row) for row in rows]
-git status

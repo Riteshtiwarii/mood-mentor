@@ -2,7 +2,7 @@
 import unittest
 
 from milestone4.security.validation import validate_telemetry
-from git add .gitignore milestone4.reporting.reports import generate_summary
+from milestone4.reporting.reports import generate_summary
 
 
 class TestMoodMentorModules(unittest.TestCase):
