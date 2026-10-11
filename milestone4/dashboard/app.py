@@ -307,8 +307,8 @@ def load_platform_services():
     cat = WellnessCatalog()
     engine = RecommendationEngine(catalog=cat)
     learner = FeedbackLearner()
-    search_eng = FilterEngine()
-    exporter = ReportExporter()
+    search_eng = FilterEngine(db=db)
+    exporter = ReportExporter(db=db)
     return db, sec, pipe, analyzer, cat, engine, learner, search_eng, exporter
 
 db, sec, pipeline, analyzer, catalog, rec_engine, feedback_learner, search_engine, exporter = load_platform_services()
@@ -606,6 +606,7 @@ elif "Search" in active_tab:
         s_kw = st.text_input("Keyword", placeholder="e.g. panic, breathing")
 
     results = search_engine.search_interactions(
+        db=db,
         emotion=None if s_emo == "All" else s_emo,
         triage_level=None if s_tier == "All" else s_tier,
         keyword=s_kw.strip() if s_kw.strip() else None,
@@ -620,7 +621,7 @@ elif "Search" in active_tab:
             "Emotion": r["primary_emotion"],
             "Intensity": f"{r['intensity_score']:.2f}",
             "Triage": r["triage_level"],
-            "Snippet": r["sanitized_text"][:50] + "...",
+            "Snippet": r["raw_text"][:50] + "...",
             "Timestamp": r["timestamp"][:19]
         } for r in results]
         st.dataframe(pd.DataFrame(table_d), use_container_width=True)
@@ -647,7 +648,7 @@ elif "Reports" in active_tab:
             with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tf:
                 pdf_p = tf.name
             try:
-                exporter.export_user_report(active_user, pdf_p, format="pdf")
+                exporter.export_executive_pdf(active_user, pdf_p)
                 with open(pdf_p, "rb") as f:
                     st.download_button(
                         label="⬇️ Download Generated PDF",
@@ -672,7 +673,7 @@ elif "Reports" in active_tab:
             with tempfile.NamedTemporaryFile(suffix=".csv", delete=False) as tf:
                 csv_p = tf.name
             try:
-                exporter.export_user_report(active_user, csv_p, format="csv")
+                exporter.export_interactions_csv(active_user, csv_p)
                 with open(csv_p, "rb") as f:
                     st.download_button(
                         label="⬇️ Download Raw CSV",
