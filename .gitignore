@@ -1,5 +1,19 @@
-venv/
+# Python cache files
 __pycache__/
-*.pyc
+*.py[cod]
+
+# Virtual environments
+venv/
+
+# Test cache
 .pytest_cache/
+
+# Environment variables and secrets
 .env
+
+# Local databases
+*.db
+
+# Generated reports
+telemetry_report.csv
+telemetry_report.pdf
