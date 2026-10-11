@@ -1,8 +1,27 @@
-.venv/
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Test and lint cache
 .pytest_cache/
+
+# Model checkpoints and weights
 *.safetensors
 *.pt
 *.bin
+
+# Environment variables and secrets
+.env
+
+# Local databases
 *.db
+
+# Generated reports
+telemetry_report.csv
+telemetry_report.pdf
