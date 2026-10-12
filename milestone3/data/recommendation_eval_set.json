@@ -1,0 +1,140 @@
+[
+  {
+    "id": "eval_01",
+    "text": "I feel like the walls are closing in on me, my heart is pounding, and I can barely breathe from acute panic.",
+    "dominant_emotion": "fear",
+    "intensity_tier": "Severe",
+    "expected_severity": "Critical",
+    "relevant_item_ids": ["act_grounding_54321", "act_box_breathing", "act_physiological_sigh", "act_eap_counseling_support"],
+    "relevance_grades": {
+      "act_grounding_54321": 2,
+      "act_box_breathing": 2,
+      "act_physiological_sigh": 2,
+      "act_eap_counseling_support": 1
+    }
+  },
+  {
+    "id": "eval_02",
+    "text": "I am completely exhausted, experiencing severe burnout, and terrified that I cannot cope with these unbearable deadlines.",
+    "dominant_emotion": "fear",
+    "intensity_tier": "Severe",
+    "expected_severity": "Critical",
+    "relevant_item_ids": ["act_eap_counseling_support", "act_box_breathing", "act_boundary_setting_protocol", "act_manager_alignment_sync"],
+    "relevance_grades": {
+      "act_eap_counseling_support": 2,
+      "act_boundary_setting_protocol": 2,
+      "act_box_breathing": 1,
+      "act_manager_alignment_sync": 2
+    }
+  },
+  {
+    "id": "eval_03",
+    "text": "I am absolutely furious and disgusted by the toxic management decisions and blatant lack of transparency.",
+    "dominant_emotion": "anger",
+    "intensity_tier": "High",
+    "expected_severity": "High",
+    "relevant_item_ids": ["act_venting_burn_journal", "act_progressive_muscle_relaxation", "act_boundary_setting_protocol", "act_emotional_labeling_journal"],
+    "relevance_grades": {
+      "act_venting_burn_journal": 2,
+      "act_boundary_setting_protocol": 2,
+      "act_progressive_muscle_relaxation": 1,
+      "act_emotional_labeling_journal": 2
+    }
+  },
+  {
+    "id": "eval_04",
+    "text": "I am thrilled and excited about leading this new initiative, but honestly a bit nervous about the technical complexity.",
+    "dominant_emotion": "joy",
+    "intensity_tier": "Moderate",
+    "expected_severity": "Mild",
+    "relevant_item_ids": ["act_celebration_milestone_log", "act_cognitive_reframing", "act_box_breathing", "act_team_recognition_share"],
+    "relevance_grades": {
+      "act_cognitive_reframing": 2,
+      "act_celebration_milestone_log": 2,
+      "act_box_breathing": 1,
+      "act_team_recognition_share": 1
+    }
+  },
+  {
+    "id": "eval_05",
+    "text": "It breaks my heart and makes me deeply depressed that our dedicated teammate was laid off without warning.",
+    "dominant_emotion": "sadness",
+    "intensity_tier": "High",
+    "expected_severity": "High",
+    "relevant_item_ids": ["act_self_compassion_pause", "act_peer_connection_coffee", "act_music_uplift_playlist", "act_walking_meeting_reset"],
+    "relevance_grades": {
+      "act_self_compassion_pause": 2,
+      "act_peer_connection_coffee": 2,
+      "act_music_uplift_playlist": 2,
+      "act_walking_meeting_reset": 1
+    }
+  },
+  {
+    "id": "eval_06",
+    "text": "My neck and shoulders are in terrible physical pain from sitting at the desk for 10 hours straight without breaks.",
+    "dominant_emotion": "anger",
+    "intensity_tier": "Moderate",
+    "expected_severity": "Moderate",
+    "relevant_item_ids": ["act_desk_stretch_ergonomics", "act_pomodoro_reset", "act_progressive_muscle_relaxation", "act_walking_meeting_reset"],
+    "relevance_grades": {
+      "act_desk_stretch_ergonomics": 2,
+      "act_pomodoro_reset": 2,
+      "act_progressive_muscle_relaxation": 1,
+      "act_walking_meeting_reset": 1
+    }
+  },
+  {
+    "id": "eval_07",
+    "text": "Our team won the annual innovation award and we are celebrating with immense pride and joy!",
+    "dominant_emotion": "joy",
+    "intensity_tier": "High",
+    "expected_severity": "Mild",
+    "relevant_item_ids": ["act_celebration_milestone_log", "act_team_recognition_share", "act_gratitude_journal"],
+    "relevance_grades": {
+      "act_celebration_milestone_log": 2,
+      "act_team_recognition_share": 2,
+      "act_gratitude_journal": 1
+    }
+  },
+  {
+    "id": "eval_08",
+    "text": "Feeling slightly tired and down this afternoon, struggling a bit to maintain focus on documentation.",
+    "dominant_emotion": "sadness",
+    "intensity_tier": "Low",
+    "expected_severity": "Mild",
+    "relevant_item_ids": ["act_pomodoro_reset", "act_mindful_cup_of_tea", "act_walking_meeting_reset"],
+    "relevance_grades": {
+      "act_pomodoro_reset": 2,
+      "act_mindful_cup_of_tea": 2,
+      "act_walking_meeting_reset": 1
+    }
+  },
+  {
+    "id": "eval_09",
+    "text": "I am in constant conflict with the cross-functional lead who continues to dismiss my engineering input disrespectfully.",
+    "dominant_emotion": "anger",
+    "intensity_tier": "High",
+    "expected_severity": "Moderate",
+    "relevant_item_ids": ["act_boundary_setting_protocol", "act_manager_alignment_sync", "act_emotional_labeling_journal", "act_venting_burn_journal"],
+    "relevance_grades": {
+      "act_boundary_setting_protocol": 2,
+      "act_manager_alignment_sync": 2,
+      "act_emotional_labeling_journal": 1,
+      "act_venting_burn_journal": 1
+    }
+  },
+  {
+    "id": "eval_10",
+    "text": "My mind is racing with racing thoughts before tonight's high-stakes executive release presentation.",
+    "dominant_emotion": "fear",
+    "intensity_tier": "High",
+    "expected_severity": "Moderate",
+    "relevant_item_ids": ["act_box_breathing", "act_breathing_478", "act_physiological_sigh", "act_guided_body_scan"],
+    "relevance_grades": {
+      "act_box_breathing": 2,
+      "act_physiological_sigh": 2,
+      "act_breathing_478": 2,
+      "act_guided_body_scan": 1
+    }
+  }
+]
