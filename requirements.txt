@@ -2,3 +2,4 @@ nltk
 vaderSentiment
 spacy
 pytest
+reportlab
