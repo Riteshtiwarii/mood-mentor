@@ -51,10 +51,25 @@ st.markdown("""
 
     * { box-sizing: border-box; }
 
-    html, body, [class*="css"] {
+    html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"], [class*="css"] {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-        color: #0F172A;
+        color: #0F172A !important;
         background-color: #F8FAFC !important;
+    }
+
+    /* Radio navigation bar styling */
+    div[data-testid="stRadio"] div[role="radiogroup"] {
+        background: #FFFFFF !important;
+        padding: 8px 16px !important;
+        border-radius: 14px !important;
+        border: 1px solid #E2E8F0 !important;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+        gap: 16px !important;
+    }
+
+    div[data-testid="stRadio"] label, div[data-testid="stRadio"] p, div[data-testid="stRadio"] span {
+        color: #0F172A !important;
+        font-weight: 600 !important;
     }
 
     #MainMenu, footer, header { visibility: hidden !important; }
@@ -347,6 +362,7 @@ active_tab = st.radio(
         "📑 Executive Reports & PDF Hub",
         "🔒 Security & GDPR Sandbox"
     ],
+    index=0,
     horizontal=True,
     label_visibility="collapsed"
 )
@@ -578,18 +594,14 @@ elif "Analytics" in active_tab:
 
     c_left, c_right = st.columns([1.6, 1.1])
     with c_left:
-        st.markdown('<div class="motion-card">', unsafe_allow_html=True)
         traj_fig = render_intensity_trajectory(history)
         if traj_fig:
             st.plotly_chart(traj_fig, use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with c_right:
-        st.markdown('<div class="motion-card">', unsafe_allow_html=True)
         donut_fig = render_emotion_distribution(history)
         if donut_fig:
             st.plotly_chart(donut_fig, use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
 
 # =============================================================================
 # VIEW 3: LIVE TELEMETRY SEARCH

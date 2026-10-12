@@ -71,8 +71,8 @@ def render_radar_state(emotion_probs: Dict[str, float]) -> Any:
         ),
         showlegend=False,
         margin=dict(l=35, r=35, t=25, b=25),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='#FFFFFF',
+        plot_bgcolor='#FFFFFF',
         height=270
     )
     return fig
@@ -157,8 +157,8 @@ def render_intensity_trajectory(interactions: List[Dict[str, Any]]) -> Any:
             tickfont=dict(size=10, color=PALETTE["text_muted"])
         ),
         margin=dict(l=45, r=30, t=45, b=45),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='#FFFFFF',
+        plot_bgcolor='#FFFFFF',
         height=320
     )
     return fig
@@ -203,7 +203,7 @@ def render_emotion_distribution(interactions: List[Dict[str, Any]]) -> Any:
         ),
         showlegend=False,
         margin=dict(l=25, r=25, t=45, b=25),
-        paper_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='#FFFFFF',
         height=270
     )
     return fig
