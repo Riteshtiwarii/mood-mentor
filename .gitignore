@@ -1,13 +1,20 @@
-# Python cache files
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*$py.class
 
 # Virtual environments
-venv/
 .venv/
+venv/
+ENV/
 
-# Test cache
+# Test and lint cache
 .pytest_cache/
+
+# Model checkpoints and weights
+*.safetensors
+*.pt
+*.bin
 
 # Environment variables and secrets
 .env
