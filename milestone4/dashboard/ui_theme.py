@@ -493,10 +493,26 @@ QUIET_LUXURY_CSS = """
         border-color: #102C27 !important;
     }
 
-    /* Sidebar Styling */
+    /* Permanent Left Sidebar Locked Open */
     section[data-testid="stSidebar"] {
+        display: block !important;
+        visibility: visible !important;
+        transform: none !important;
+        margin-left: 0 !important;
+        min-width: 300px !important;
+        max-width: 320px !important;
         background-color: #FFFFFF !important;
         border-right: 1px solid #E4E5DD !important;
+    }
+    section[data-testid="stSidebar"] > div {
+        transform: none !important;
+        visibility: visible !important;
+    }
+    section[data-testid="stSidebar"][aria-expanded="false"] {
+        display: block !important;
+        visibility: visible !important;
+        transform: none !important;
+        margin-left: 0 !important;
     }
 
     /* Expander styling */

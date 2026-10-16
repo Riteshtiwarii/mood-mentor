@@ -67,9 +67,9 @@ db, sec, pipeline, analyzer, catalog, rec_engine, feedback_learner, search_engin
 # 3. Authentication & Onboarding Gate (Two-Column Responsive Experience)
 # -----------------------------------------------------------------------------
 if "authenticated" not in st.session_state:
-    st.session_state["authenticated"] = False
+    st.session_state["authenticated"] = True
 if "is_demo" not in st.session_state:
-    st.session_state["is_demo"] = False
+    st.session_state["is_demo"] = True
 
 if not st.session_state["authenticated"]:
     # Render Two-Column Editorial Sign-In Experience
