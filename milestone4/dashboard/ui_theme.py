@@ -50,6 +50,15 @@ QUIET_LUXURY_CSS = """
     [data-testid="stSidebarNav"] {
         display: block !important;
     }
+    /* Eliminate dulling/dimming fade during execution reruns */
+    .stApp[data-test-script-state="running"] > .main,
+    .stApp[data-test-script-state="running"] [data-testid="stAppViewContainer"],
+    .stApp[data-test-script-state="running"] .block-container,
+    [data-testid="stAppViewContainer"] {
+        opacity: 1 !important;
+        filter: none !important;
+        transition: none !important;
+    }
     .block-container {
         padding-top: 1.2rem !important;
         padding-bottom: 3.5rem !important;
