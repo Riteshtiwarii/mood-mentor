@@ -201,9 +201,9 @@ def render_emotion_distribution(interactions: List[Dict[str, Any]]) -> Any:
     fig = go.Figure(data=[go.Pie(
         labels=labels,
         values=values,
-        hole=0.66,
+        hole=0.62,
         marker=dict(colors=colors, line=dict(color="#FFFFFF", width=2)),
-        textinfo="percent+label",
+        textinfo="percent",
         hoverinfo="label+value+percent",
         textfont=dict(family=FONT_FAMILY, size=11, color=PALETTE["text_dark"])
     )])
@@ -214,11 +214,19 @@ def render_emotion_distribution(interactions: List[Dict[str, Any]]) -> Any:
             text="<b>Dominant Affect Distribution</b>",
             font=dict(size=14, color=PALETTE["text_dark"])
         ),
-        showlegend=False,
-        margin=dict(l=25, r=25, t=45, b=25),
+        showlegend=True,
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=-0.22,
+            xanchor="center",
+            x=0.5,
+            font=dict(family=FONT_FAMILY, size=11, color=PALETTE["text_dark"])
+        ),
+        margin=dict(l=20, r=20, t=40, b=40),
         paper_bgcolor='#FFFFFF',
         plot_bgcolor='#FFFFFF',
-        height=280
+        height=320
     )
     return fig
 

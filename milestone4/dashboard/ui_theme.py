@@ -186,7 +186,7 @@ QUIET_LUXURY_CSS = """
     }
 
     /* ---------------- CARDS & ELEVATIONS ---------------- */
-    .quiet-card {
+    .quiet-card, .enterprise-card {
         background: #FFFFFF;
         border: 1px solid #E4E5DD;
         border-radius: 18px;
@@ -197,10 +197,22 @@ QUIET_LUXURY_CSS = """
         animation: cardFadeIn 0.4s ease-out;
     }
 
-    .quiet-card:hover {
+    .quiet-card:hover, .enterprise-card:hover {
         transform: translateY(-2px);
         box-shadow: 0 10px 24px -4px rgba(24, 61, 53, 0.06);
         border-color: #A8B9A5;
+    }
+
+    .pill-tag {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        margin-right: 6px;
+        background: #E8EDE5;
+        color: #183D35;
+        border: 1px solid #A8B9A5;
     }
 
     .metric-card {
@@ -326,38 +338,44 @@ QUIET_LUXURY_CSS = """
     /* ---------------- 3D ORGANIC BREATHING SIGNATURE ---------------- */
     .breathing-stage {
         position: relative;
-        width: 260px;
-        height: 260px;
-        margin: 20px auto;
+        width: 250px;
+        height: 250px;
+        margin: 16px auto;
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: default;
+        transition: transform 0.35s ease;
+    }
+
+    .breathing-stage:hover {
+        transform: scale(1.02);
     }
 
     .breathing-ring-outer {
         position: absolute;
-        width: 240px;
-        height: 240px;
+        width: 230px;
+        height: 230px;
         border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
-        background: radial-gradient(circle, rgba(168, 185, 165, 0.35) 0%, rgba(24, 61, 53, 0.05) 70%);
-        border: 1px dashed rgba(24, 61, 53, 0.25);
-        animation: breathe-calm 14s infinite linear;
+        background: radial-gradient(circle, rgba(168, 185, 165, 0.30) 0%, rgba(24, 61, 53, 0.04) 70%);
+        border: 1px dashed rgba(24, 61, 53, 0.22);
+        animation: breathe-calm 16s infinite linear;
     }
 
     .breathing-ring-mid {
         position: absolute;
-        width: 180px;
-        height: 180px;
+        width: 170px;
+        height: 170px;
         border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-        background: radial-gradient(circle, rgba(183, 121, 85, 0.2) 0%, rgba(45, 106, 79, 0.1) 80%);
-        border: 1px solid rgba(183, 121, 85, 0.35);
-        animation: breathe-calm 9s infinite reverse ease-in-out;
+        background: radial-gradient(circle, rgba(183, 121, 85, 0.18) 0%, rgba(45, 106, 79, 0.08) 80%);
+        border: 1px solid rgba(183, 121, 85, 0.3);
+        animation: breathe-calm 10s infinite reverse ease-in-out;
     }
 
     .breathing-ring-core {
         position: absolute;
-        width: 110px;
-        height: 110px;
+        width: 105px;
+        height: 105px;
         border-radius: 50%;
         background: linear-gradient(135deg, #183D35 0%, #102C27 100%);
         display: flex;
@@ -365,8 +383,23 @@ QUIET_LUXURY_CSS = """
         align-items: center;
         justify-content: center;
         color: #F6F4EE;
-        box-shadow: 0 0 45px rgba(24, 61, 53, 0.3);
-        animation: breathe-core 5s infinite ease-in-out;
+        box-shadow: 0 8px 30px rgba(16, 44, 39, 0.35);
+        animation: breathe-core 6s infinite ease-in-out;
+        transition: transform 0.3s ease;
+    }
+
+    .breathing-stage:hover .breathing-ring-core {
+        transform: scale(1.05);
+        box-shadow: 0 10px 38px rgba(16, 44, 39, 0.45);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .breathing-ring-outer,
+        .breathing-ring-mid,
+        .breathing-ring-core,
+        .pulse-dot {
+            animation: none !important;
+        }
     }
 
     /* ---------------- STREAMLIT COMPONENT OVERRIDES ---------------- */
@@ -481,16 +514,97 @@ def render_top_navbar(current_view: str = "Clinical Copilot"):
     </div>
     """, unsafe_allow_html=True)
 
-def render_breathing_visual():
-    """Renders the organic 3D breathing visual signature in HTML/CSS."""
-    return """
-    <div class="breathing-stage">
-        <div class="breathing-ring-outer"></div>
-        <div class="breathing-ring-mid"></div>
-        <div class="breathing-ring-core">
-            <span style="font-size:26px; line-height:1;">🌿</span>
-            <span style="font-size:9.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-top:4px;">Equilibrium</span>
+def render_sidebar_context(default_index: int = 0) -> str:
+    """Renders enterprise team, user profile context and quick platform telemetry in the sidebar."""
+    with st.sidebar:
+        st.markdown("""
+        <div style="padding: 6px 0 14px 0; border-bottom: 1px solid #E4E5DD; margin-bottom: 14px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:34px; height:34px; background:#183D35; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#F6F4EE; font-size:16px;">🌿</div>
+                <div>
+                    <p style="margin:0; font-size:13.5px; font-weight:700; color:#183D35;">Meridian Health</p>
+                    <p style="margin:0; font-size:11px; color:#727A73; font-family:'JetBrains Mono', monospace;">ws-873519 • Enterprise</p>
+                </div>
+            </div>
         </div>
-    </div>
-    """
+        """, unsafe_allow_html=True)
+
+        user_id = st.selectbox(
+            "👤 Active Employee Profile",
+            [
+                "emp_01 (Sarah Lin - Eng)",
+                "emp_02 (Marcus Vance - Sales)",
+                "emp_03 (Elena Rostova - Design)"
+            ],
+            index=default_index
+        )
+
+        st.markdown("""
+        <div style="background:#F6F4EE; border:1px solid #E4E5DD; border-radius:10px; padding:12px; margin-top:16px;">
+            <p style="margin:0 0 6px 0; font-size:11px; font-weight:700; color:#183D35; text-transform:uppercase; letter-spacing:0.04em;">Platform Security</p>
+            <div style="font-size:11px; color:#202B27; line-height:1.6;">
+                • PII Masking: <b>Active (spaCy NER)</b><br>
+                • Model: <b>DistilBERT Multi-Label</b><br>
+                • Storage: <b>Encrypted SQLite WAL</b><br>
+                • 988 Crisis Guardrail: <b>Enforced</b>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        return user_id.split()[0]
+
+def render_breathing_visual() -> str:
+    """Renders the organic 3D breathing visual signature in HTML/CSS."""
+    return """<div class="breathing-stage">
+<div class="breathing-ring-outer"></div>
+<div class="breathing-ring-mid"></div>
+<div class="breathing-ring-core">
+<span style="font-size:24px; line-height:1;">🌿</span>
+<span style="font-size:9px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-top:4px;">Equilibrium</span>
+</div>
+</div>"""
+
+def render_login_hero() -> str:
+    """Renders the refined editorial hero section on the left side of the login experience."""
+    breathing = render_breathing_visual()
+    return f"""<div style="background: linear-gradient(145deg, #183D35 0%, #102C27 100%); border-radius: 22px; padding: 34px 30px; color: #F6F4EE; box-shadow: 0 12px 36px rgba(16, 44, 39, 0.2); border: 1px solid rgba(168, 185, 165, 0.25);">
+<div style="display:flex; align-items:center; gap:12px; margin-bottom: 20px;">
+<div style="width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; font-size:20px; border:1px solid rgba(255,255,255,0.2);">🌿</div>
+<div>
+<h2 style="margin:0; font-size:18px; font-weight:700; color:#FFFFFF; letter-spacing:-0.02em;">MoodMentor AI</h2>
+<p style="margin:0; font-size:11px; font-weight:600; color:#A8B9A5; text-transform:uppercase; letter-spacing:0.05em;">Enterprise Clinical Intelligence</p>
+</div>
+</div>
+<h1 style="margin:0 0 12px 0; font-size:27px; font-weight:800; line-height:1.25; color:#FFFFFF; letter-spacing:-0.02em;">
+Understand the emotion. <br><span style="color:#A8B9A5;">Support the person.</span>
+</h1>
+<p style="margin:0 0 16px 0; font-size:13.5px; color:#E4E5DD; line-height:1.6;">
+Enterprise AI emotional intelligence platform providing real-time affective computing, longitudinal burnout telemetry, and evidence-based clinical interventions.
+</p>
+{breathing}
+<div style="display:flex; flex-direction:column; gap:10px; margin-top:18px;">
+<div style="display:flex; align-items:flex-start; gap:10px; background:rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.08);">
+<span style="font-size:16px;">🧠</span>
+<div>
+<p style="margin:0; font-size:12.5px; font-weight:700; color:#FFFFFF;">Clinical Precision</p>
+<p style="margin:2px 0 0 0; font-size:11.5px; color:#E4E5DD; line-height:1.4;">Ekman 6-D affective mapping calibrated with DistilBERT and VADER sentiment vectors.</p>
+</div>
+</div>
+<div style="display:flex; align-items:flex-start; gap:10px; background:rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.08);">
+<span style="font-size:16px;">🛡️</span>
+<div>
+<p style="margin:0; font-size:12.5px; font-weight:700; color:#FFFFFF;">Zero-PII Privacy</p>
+<p style="margin:2px 0 0 0; font-size:11.5px; color:#E4E5DD; line-height:1.4;">On-device entity scrubbing ensuring complete employee anonymity.</p>
+</div>
+</div>
+<div style="display:flex; align-items:flex-start; gap:10px; background:rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.08);">
+<span style="font-size:16px;">📉</span>
+<div>
+<p style="margin:0; font-size:12.5px; font-weight:700; color:#FFFFFF;">Proactive Resilience</p>
+<p style="margin:2px 0 0 0; font-size:11.5px; color:#E4E5DD; line-height:1.4;">Early warning burnout indicators reducing unmanaged stress escalations.</p>
+</div>
+</div>
+</div>
+</div>"""
+
 

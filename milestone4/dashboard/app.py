@@ -33,7 +33,8 @@ from dashboard.trend_visualizer import (
 )
 from dashboard.ui_theme import (
     apply_enterprise_theme, render_top_navbar,
-    render_breathing_visual, QUIET_LUXURY_CSS
+    render_breathing_visual, render_login_hero,
+    render_sidebar_context, QUIET_LUXURY_CSS
 )
 
 # -----------------------------------------------------------------------------
@@ -67,88 +68,59 @@ db, sec, pipeline, analyzer, catalog, rec_engine, feedback_learner, search_engin
 # -----------------------------------------------------------------------------
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
+if "is_demo" not in st.session_state:
+    st.session_state["is_demo"] = False
 
 if not st.session_state["authenticated"]:
     # Render Two-Column Editorial Sign-In Experience
-    auth_left, auth_right = st.columns([1.18, 0.92], gap="large")
+    auth_left, auth_right = st.columns([1.18, 0.95], gap="large")
 
     with auth_left:
-        st.markdown("""
-        <div style="background: linear-gradient(145deg, #183D35 0%, #102C27 100%); border-radius: 24px; padding: 40px 36px; color: #F6F4EE; box-shadow: 0 12px 36px rgba(16, 44, 39, 0.2); border: 1px solid rgba(168, 185, 165, 0.25);">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom: 24px;">
-                <div style="width:44px; height:44px; border-radius:12px; background:rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; font-size:22px; border:1px solid rgba(255,255,255,0.2);">🌿</div>
-                <div>
-                    <h2 style="margin:0; font-size:21px; font-weight:700; color:#FFFFFF; letter-spacing:-0.02em;">MoodMentor AI</h2>
-                    <p style="margin:0; font-size:11px; font-weight:600; color:#A8B9A5; text-transform:uppercase; letter-spacing:0.06em;">Enterprise Clinical Intelligence</p>
-                </div>
-            </div>
-            
-            <h1 style="margin:0 0 14px 0; font-size:32px; font-weight:800; line-height:1.2; color:#FFFFFF; letter-spacing:-0.03em;">
-                Quiet Luxury Meets <br><span style="color:#A8B9A5;">Clinical Intelligence.</span>
-            </h1>
-            <p style="margin:0 0 28px 0; font-size:14px; color:#E4E5DD; line-height:1.65; max-width:480px;">
-                Empowering high-performance enterprises with real-time affective computing, longitudinal burnout telemetry, and evidence-based clinical interventions.
-            </p>
-        """, unsafe_allow_html=True)
-
-        # 3D Organic Breathing Signature
-        st.markdown(render_breathing_visual(), unsafe_allow_html=True)
-
-        st.markdown("""
-            <div style="margin-top:24px; padding:18px 22px; background:rgba(255,255,255,0.06); border-radius:16px; border:1px solid rgba(255,255,255,0.1);">
-                <p style="margin:0 0 8px 0; font-size:12.5px; font-style:italic; color:#F6F4EE; line-height:1.5;">
-                    "MoodMentor delivered a 42% reduction in unmanaged stress escalations across our engineering and leadership cohorts within 60 days."
-                </p>
-                <p style="margin:0; font-size:11px; font-weight:700; color:#A8B9A5; text-transform:uppercase; letter-spacing:0.04em;">
-                    — Dr. Julian Vance, Chief People Officer, Meridian Health Partners
-                </p>
-            </div>
-
-            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:24px;">
-                <span style="font-size:11px; font-weight:600; background:rgba(255,255,255,0.08); padding:5px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); color:#E4E5DD;">🔒 HIPAA & GDPR Tier-4</span>
-                <span style="font-size:11px; font-weight:600; background:rgba(255,255,255,0.08); padding:5px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); color:#E4E5DD;">🛡️ Zero-PII Redaction</span>
-                <span style="font-size:11px; font-weight:600; background:rgba(255,255,255,0.08); padding:5px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); color:#E4E5DD;">⚡ DistilBERT 6-D Core</span>
-                <span style="font-size:11px; font-weight:600; background:rgba(255,255,255,0.08); padding:5px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); color:#E4E5DD;">📜 SOC 2 Type II Certified</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(render_login_hero(), unsafe_allow_html=True)
 
     with auth_right:
-        st.markdown("""
-        <div class="quiet-card" style="padding: 34px 30px; margin-top: 6px;">
-            <div style="margin-bottom: 22px;">
-                <h3 style="margin:0 0 6px 0; font-size:22px; font-weight:800; color:#183D35; letter-spacing:-0.02em;">Enterprise Workspace Access</h3>
-                <p style="margin:0; font-size:13px; color:#727A73;">Authenticate with your corporate credentials or single sign-on</p>
+        with st.container(border=True):
+            st.markdown("""
+            <div style="margin-bottom: 20px;">
+                <h3 style="margin:0 0 6px 0; font-size:21px; font-weight:800; color:#183D35; letter-spacing:-0.02em;">Enterprise Workspace Access</h3>
+                <p style="margin:0; font-size:13px; color:#727A73;">Sign in with your corporate credentials or explore evaluator demo</p>
             </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
 
-        auth_email = st.text_input("Corporate Email", value="sarah.lin@meridianhealth.org", placeholder="name@company.com")
-        auth_pwd = st.text_input("Password", type="password", value="••••••••••••")
-        st.checkbox("Remember this workstation for 30 days", value=True)
+            auth_email = st.text_input("Corporate Email", placeholder="name@enterprise.org", key="auth_email_input")
+            auth_pwd = st.text_input("Password", type="password", placeholder="Enter your password", key="auth_pwd_input")
 
-        st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
-        login_btn = st.button("Sign In to Workspace", use_container_width=True)
+            st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
+            login_btn = st.button("Sign In to Workspace", use_container_width=True)
 
-        st.markdown("""
-        <div style="text-align:center; margin: 18px 0 14px 0; position:relative;">
-            <div style="height:1px; background:#E4E5DD; width:100%; position:absolute; top:50%;"></div>
-            <span style="position:relative; background:#FFFFFF; padding:0 12px; font-size:11.5px; color:#727A73; font-weight:600; text-transform:uppercase;">or evaluator access</span>
-        </div>
-        """, unsafe_allow_html=True)
+            if login_btn:
+                if not auth_email.strip() or not auth_pwd.strip():
+                    st.error("⚠️ Please enter both your corporate email and password.")
+                else:
+                    st.session_state["authenticated"] = True
+                    st.session_state["is_demo"] = False
+                    st.session_state["user_display"] = auth_email.split("@")[0].replace(".", " ").title()
+                    st.rerun()
 
-        demo_access_btn = st.button("✨ Explore Workspace Demo (1-Click Evaluator Access)", type="primary", use_container_width=True)
+            st.markdown("""
+            <div style="text-align:center; margin: 18px 0 14px 0; position:relative;">
+                <div style="height:1px; background:#E4E5DD; width:100%; position:absolute; top:50%;"></div>
+                <span style="position:relative; background:#FFFFFF; padding:0 12px; font-size:11px; color:#727A73; font-weight:600; text-transform:uppercase; letter-spacing:0.04em;">or demo access</span>
+            </div>
+            """, unsafe_allow_html=True)
 
-        st.markdown("""
+            demo_access_btn = st.button("✨ Explore Workspace Demo (1-Click Evaluator Access)", type="primary", use_container_width=True)
+            if demo_access_btn:
+                st.session_state["authenticated"] = True
+                st.session_state["is_demo"] = True
+                st.session_state["user_display"] = "Evaluator (Demo)"
+                st.rerun()
+
+            st.markdown("""
             <div style="margin-top:20px; padding:12px; background:#F6F4EE; border-radius:10px; border:1px solid #E4E5DD; font-size:11.5px; color:#727A73; line-height:1.5;">
-                🔒 <b>Privacy Notice:</b> All session telemetry is encrypted with AES-256. Natural language input is scrubbed of PII via spaCy NER prior to neural classification.
+                🔒 <b>Privacy Notice:</b> All session telemetry is encrypted with AES-256. Natural language input is scrubbed of PII via on-device spaCy NER prior to neural classification.
             </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        if login_btn or demo_access_btn:
-            st.session_state["authenticated"] = True
-            st.session_state["active_user_name"] = "Sarah Lin"
-            st.rerun()
+            """, unsafe_allow_html=True)
 
     # Halt execution so workspace is only viewable once authenticated
     st.stop()
@@ -181,7 +153,14 @@ with st.sidebar:
     )
     active_user = active_user_full.split()[0]
 
-    st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
+    if st.session_state.get("is_demo", False):
+        st.markdown("""
+        <div style="background:#E8EDE5; border:1px solid #A8B9A5; border-radius:8px; padding:6px 10px; margin-bottom:12px; font-size:11px; font-weight:700; color:#183D35; text-align:center;">
+            ✨ Evaluator Demo Mode Active
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
     st.markdown("<p style='font-size:11px; font-weight:700; color:#727A73; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;'>Navigation</p>", unsafe_allow_html=True)
 
     active_tab = st.radio(
@@ -215,6 +194,7 @@ with st.sidebar:
     st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
     if st.button("🚪 Sign Out of Workspace", use_container_width=True):
         st.session_state["authenticated"] = False
+        st.session_state["is_demo"] = False
         st.rerun()
 
 # -----------------------------------------------------------------------------
@@ -274,6 +254,7 @@ if "Copilot" in active_tab:
         st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
         analyze_btn = st.button("✨ Run Neural Affect Diagnostics", type="primary", use_container_width=True)
 
+        st.markdown("<p style='font-size:11.5px; color:#727A73; margin-top:10px; font-style:italic;'>ℹ️ <b>Clinical Advisory Notice:</b> AI-generated affective telemetry provides supportive psychological wellness insights and does not constitute formal psychiatric diagnosis.</p>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
         # Execute Inference Pipeline
