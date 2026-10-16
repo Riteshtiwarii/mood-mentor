@@ -28,7 +28,6 @@ except Exception:
 apply_enterprise_theme("Telemetry & Audit Search — MoodMentor", "🔍")
 render_top_navbar("Live Telemetry & Parameterized Audit Search")
 active_user = render_sidebar_context()
-st.page_link("app.py", label="← Return to Clinical Copilot (Text Emotion Analyzer)", icon="🧠")
 
 filter_engine = FilterEngine()
 db = DatabaseManager()

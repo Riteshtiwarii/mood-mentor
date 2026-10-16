@@ -18,7 +18,6 @@ from moodmentor.storage.db import DatabaseManager
 apply_enterprise_theme("Security & Compliance — MoodMentor", "🔒")
 render_top_navbar("Security Guardrails, PII Redaction & GDPR Compliance")
 active_user = render_sidebar_context()
-st.page_link("app.py", label="← Return to Clinical Copilot (Text Emotion Analyzer)", icon="🧠")
 
 sec = SecurityManager()
 db = DatabaseManager()

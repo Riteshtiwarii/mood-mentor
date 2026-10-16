@@ -46,9 +46,9 @@ QUIET_LUXURY_CSS = """
         fill: #F6F4EE !important;
         stroke: #F6F4EE !important;
     }
-    /* Hide duplicate multipage nav */
+    /* Multipage sidebar nav visible */
     [data-testid="stSidebarNav"] {
-        display: none !important;
+        display: block !important;
     }
     .block-container {
         padding-top: 1.2rem !important;
@@ -594,6 +594,14 @@ def render_sidebar_context(default_index: int = 0) -> str:
             ],
             index=default_index
         )
+
+        st.markdown("<p style='font-size:11px; font-weight:700; color:#727A73; text-transform:uppercase; letter-spacing:0.05em; margin:16px 0 8px 0;'>Navigation Menu</p>", unsafe_allow_html=True)
+        st.page_link("app.py", label="Clinical Copilot (Text Emotion)", icon="🧠")
+        st.page_link("pages/1_📈_Analytics_&_Trends.py", label="Longitudinal Analytics & Burnout", icon="📈")
+        st.page_link("pages/2_🔍_Telemetry_Search.py", label="Live Telemetry Search Engine", icon="🔍")
+        st.page_link("pages/3_📑_Executive_Reports.py", label="Executive Reports & PDF Hub", icon="📑")
+        st.page_link("pages/4_🔒_Security_&_Compliance.py", label="Security & GDPR Sandbox", icon="🔒")
+
         return user_id.split()[0]
 
 def render_breathing_visual() -> str:
