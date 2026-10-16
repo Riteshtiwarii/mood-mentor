@@ -46,6 +46,10 @@ QUIET_LUXURY_CSS = """
         fill: #F6F4EE !important;
         stroke: #F6F4EE !important;
     }
+    /* Hide duplicate multipage nav */
+    [data-testid="stSidebarNav"] {
+        display: none !important;
+    }
     .block-container {
         padding-top: 1.2rem !important;
         padding-bottom: 3.5rem !important;
@@ -590,19 +594,6 @@ def render_sidebar_context(default_index: int = 0) -> str:
             ],
             index=default_index
         )
-
-        st.markdown("""
-        <div style="background:#F6F4EE; border:1px solid #E4E5DD; border-radius:10px; padding:12px; margin-top:16px;">
-            <p style="margin:0 0 6px 0; font-size:11px; font-weight:700; color:#183D35; text-transform:uppercase; letter-spacing:0.04em;">Platform Security</p>
-            <div style="font-size:11px; color:#202B27; line-height:1.6;">
-                • PII Masking: <b>Active (spaCy NER)</b><br>
-                • Model: <b>DistilBERT Multi-Label</b><br>
-                • Storage: <b>Encrypted SQLite WAL</b><br>
-                • 988 Crisis Guardrail: <b>Enforced</b>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
         return user_id.split()[0]
 
 def render_breathing_visual() -> str:

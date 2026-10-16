@@ -28,6 +28,7 @@ except Exception:
 apply_enterprise_theme("Executive Reports & PDF Hub — MoodMentor", "📑")
 render_top_navbar("Executive Telemetry & PDF Report Generation Hub")
 active_user = render_sidebar_context()
+st.page_link("app.py", label="← Return to Clinical Copilot (Text Emotion Analyzer)", icon="🧠")
 
 db = DatabaseManager()
 exporter = ReportExporter(db=db)

@@ -24,6 +24,7 @@ from moodmentor.storage.db import DatabaseManager
 apply_enterprise_theme("Longitudinal Analytics & Trends — MoodMentor", "📈")
 render_top_navbar("Longitudinal Affect Analytics & Burnout Risk")
 active_user = render_sidebar_context()
+st.page_link("app.py", label="← Return to Clinical Copilot (Text Emotion Analyzer)", icon="🧠")
 
 # Database & telemetry
 db = DatabaseManager()

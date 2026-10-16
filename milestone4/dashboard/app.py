@@ -176,20 +176,7 @@ with st.sidebar:
         label_visibility="collapsed"
     )
 
-    st.markdown("""
-    <div style="background:#F6F4EE; border:1px solid #E4E5DD; border-radius:12px; padding:14px; margin-top:20px;">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-            <p style="margin:0; font-size:11px; font-weight:700; color:#183D35; text-transform:uppercase; letter-spacing:0.04em;">Platform Status</p>
-            <span style="font-size:10px; font-weight:700; color:#2D6A4F; background:#E8EDE5; padding:2px 6px; border-radius:4px; border:1px solid #A8B9A5;">LIVE</span>
-        </div>
-        <div style="font-size:11px; color:#202B27; line-height:1.65;">
-            • Inference: <b>24ms (Neural Core)</b><br>
-            • Pipeline: <b>DistilBERT + VADER</b><br>
-            • Storage: <b>Encrypted SQLite WAL</b><br>
-            • Guardrail: <b>988 Lifeline Enforced</b>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+
 
     st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
     if st.button("🚪 Sign Out of Workspace", use_container_width=True):
