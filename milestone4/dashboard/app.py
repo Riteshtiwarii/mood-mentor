@@ -525,8 +525,8 @@ if "Copilot" in active_tab:
         if triage == "Critical":
             st.error("⚠️ Crisis Guardrail Alert: Emergency hotline protocol active. Please dial or text 988 for immediate crisis assistance.")
 
-        # Metric Strip
-        m_c1, m_c2 = st.columns(2)
+        # Metric Strip (3 Columns: Emotion, Polarity, Intensity)
+        m_c1, m_c2, m_c3 = st.columns(3)
         with m_c1:
             st.markdown(f"""
             <div class="motion-card" style="padding:16px; margin-bottom:14px;">
@@ -536,6 +536,16 @@ if "Copilot" in active_tab:
             </div>
             """, unsafe_allow_html=True)
         with m_c2:
+            pol_label = "Positive" if compound > 0.05 else ("Negative" if compound < -0.05 else "Neutral")
+            pol_color = "#10B981" if compound > 0.05 else ("#EF4444" if compound < -0.05 else "#64748B")
+            st.markdown(f"""
+            <div class="motion-card" style="padding:16px; margin-bottom:14px;">
+                <p style="margin:0; font-size:11.5px; font-weight:700; color:#64748B; text-transform:uppercase;">Sentiment Polarity</p>
+                <h3 style="margin:4px 0 0 0; font-size:24px; font-weight:800; color:{pol_color};">{compound:+.2f}</h3>
+                <p style="margin:2px 0 0 0; font-size:11.5px; color:#94A3B8;">Valence: {pol_label}</p>
+            </div>
+            """, unsafe_allow_html=True)
+        with m_c3:
             st.markdown(f"""
             <div class="motion-card" style="padding:16px; margin-bottom:14px;">
                 <p style="margin:0; font-size:11.5px; font-weight:700; color:#64748B; text-transform:uppercase;">Intensity Index</p>
@@ -632,6 +642,7 @@ elif "Search" in active_tab:
         table_d = [{
             "ID": r["id"],
             "Emotion": r["primary_emotion"],
+            "Polarity": f"{r.get('vader_compound', 0.0):+.2f}",
             "Intensity": f"{r['intensity_score']:.2f}",
             "Triage": r["triage_level"],
             "Snippet": r["raw_text"][:50] + "...",
