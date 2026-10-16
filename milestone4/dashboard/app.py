@@ -160,8 +160,24 @@ with st.sidebar:
         </div>
         """, unsafe_allow_html=True)
 
+    st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size:11px; font-weight:700; color:#727A73; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;'>Navigation</p>", unsafe_allow_html=True)
+
+    active_tab = st.radio(
+        "Navigation",
+        [
+            "🧠 Clinical Copilot & Live Inference",
+            "📈 Longitudinal Analytics & Burnout Meter",
+            "🔍 Live Telemetry Search Engine",
+            "📑 Executive Reports & PDF Hub",
+            "🔒 Security & GDPR Sandbox"
+        ],
+        index=0,
+        label_visibility="collapsed"
+    )
+
     st.markdown("""
-    <div style="background:#F6F4EE; border:1px solid #E4E5DD; border-radius:12px; padding:14px; margin-top:16px;">
+    <div style="background:#F6F4EE; border:1px solid #E4E5DD; border-radius:12px; padding:14px; margin-top:20px;">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
             <p style="margin:0; font-size:11px; font-weight:700; color:#183D35; text-transform:uppercase; letter-spacing:0.04em;">Platform Status</p>
             <span style="font-size:10px; font-weight:700; color:#2D6A4F; background:#E8EDE5; padding:2px 6px; border-radius:4px; border:1px solid #A8B9A5;">LIVE</span>
@@ -182,32 +198,10 @@ with st.sidebar:
         st.rerun()
 
 # -----------------------------------------------------------------------------
-# 5. Executive Top Navigation Bar & Primary Horizontal Tabs
+# 5. Executive Top Navigation Bar
 # -----------------------------------------------------------------------------
-NAV_TABS = [
-    "🧠 Clinical Copilot & Live Inference",
-    "📈 Longitudinal Analytics & Burnout Meter",
-    "🔍 Live Telemetry Search Engine",
-    "📑 Executive Reports & PDF Hub",
-    "🔒 Security & GDPR Sandbox"
-]
-
-if "main_nav_tab" not in st.session_state:
-    st.session_state["main_nav_tab"] = NAV_TABS[0]
-
-tab_label = st.session_state["main_nav_tab"].split(" ", 1)[1] if " " in st.session_state["main_nav_tab"] else st.session_state["main_nav_tab"]
-render_top_navbar(current_view=tab_label)
-
-active_tab = st.radio(
-    "Navigation Views",
-    NAV_TABS,
-    index=NAV_TABS.index(st.session_state["main_nav_tab"]) if st.session_state["main_nav_tab"] in NAV_TABS else 0,
-    horizontal=True,
-    label_visibility="collapsed",
-    key="platform_main_tabs"
-)
-st.session_state["main_nav_tab"] = active_tab
-st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
+view_label = active_tab.split(" ", 1)[1] if " " in active_tab else active_tab
+render_top_navbar(current_view=view_label)
 
 # -----------------------------------------------------------------------------
 # VIEW 1: CLINICAL COPILOT & REAL-TIME INFERENCE
