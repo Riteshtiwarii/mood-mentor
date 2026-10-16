@@ -11,31 +11,28 @@ except Exception:
     px = None
     HAS_PLOTLY = False
 
-# Quiet Luxury Meets Clinical Intelligence Palette (Enterprise Wellness Edition)
+# Enterprise Healthcare SaaS Color Palette (Modern Health / Stripe Caliber)
 PALETTE = {
-    "joy": "#2D6A4F",       # Deep Restorative Green
-    "sadness": "#6B7A82",   # Subdued Slate Grey
-    "anger": "#B91C1C",     # Clinical Crimson
-    "fear": "#B77955",      # Restrained Copper
-    "love": "#9C667B",      # Muted Heather Rose
-    "surprise": "#5E7A8A",  # Soft Indigo Slate
-    "primary": "#183D35",   # Deep Forest Green
-    "primary_light": "#2D6A4F",
-    "accent": "#B77955",    # Warm Restrained Copper
-    "sage": "#A8B9A5",      # Muted Sage
-    "sage_surface": "#E8EDE5", # Soft Sage Tint
+    "joy": "#10B981",       # Emerald Green
+    "sadness": "#64748B",   # Slate Blue
+    "anger": "#EF4444",     # Soft Crimson
+    "fear": "#F59E0B",      # Warm Amber
+    "love": "#EC4899",      # Rose Pink
+    "surprise": "#8B5CF6",  # Indigo Violet
+    "primary": "#0F766E",   # Deep Clinical Teal
+    "primary_light": "#14B8A6",
+    "accent": "#0284C7",    # Oceanic Blue
     "bg_card": "#FFFFFF",
-    "bg_canvas": "#F6F4EE",
-    "text_dark": "#202B27", # Deep Graphite
-    "text_muted": "#727A73", # Refined Muted Text
-    "grid": "#E4E5DD",      # Architectural Hairline Grid
-    "border": "#E4E5DD"
+    "text_dark": "#0F172A",
+    "text_muted": "#64748B",
+    "grid": "#F1F5F9",
+    "border": "#E2E8F0"
 }
 
-FONT_FAMILY = "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif"
+FONT_FAMILY = "Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif"
 
 def render_radar_state(emotion_probs: Dict[str, float]) -> Any:
-    """Generates an executive 6-D emotion radar geometry with quiet luxury precision"""
+    """Generates an executive 6-D emotion radar geometry with clinical precision"""
     if not HAS_PLOTLY or go is None:
         return None
     categories = [k.capitalize() for k in emotion_probs.keys()]
@@ -48,9 +45,9 @@ def render_radar_state(emotion_probs: Dict[str, float]) -> Any:
         r=values,
         theta=categories,
         fill='toself',
-        fillcolor='rgba(24, 61, 53, 0.14)',
-        line=dict(color=PALETTE["primary"], width=2.2),
-        marker=dict(size=5, color=PALETTE["accent"], symbol="circle"),
+        fillcolor='rgba(15, 118, 110, 0.16)',
+        line=dict(color=PALETTE["primary"], width=2.5),
+        marker=dict(size=6, color=PALETTE["primary"], symbol="circle"),
         hovertemplate="<b>%{theta}</b>: %{r:.1%}<extra></extra>",
         name="Affect Profile"
     ))
@@ -70,13 +67,13 @@ def render_radar_state(emotion_probs: Dict[str, float]) -> Any:
                 linecolor=PALETTE["border"],
                 tickfont=dict(size=11, color=PALETTE["text_dark"], weight=600)
             ),
-            bgcolor="rgba(246, 244, 238, 0.45)"
+            bgcolor="rgba(248, 250, 252, 0.5)"
         ),
         showlegend=False,
         margin=dict(l=35, r=35, t=25, b=25),
         paper_bgcolor='#FFFFFF',
         plot_bgcolor='#FFFFFF',
-        height=280
+        height=270
     )
     return fig
 
@@ -91,11 +88,6 @@ def render_intensity_trajectory(interactions: List[Dict[str, Any]]) -> Any:
             showarrow=False,
             font=dict(family=FONT_FAMILY, size=13, color=PALETTE["text_muted"])
         )
-        fig.update_layout(
-            paper_bgcolor='#FFFFFF',
-            plot_bgcolor='#FFFFFF',
-            height=320
-        )
         return fig
 
     # Sort chronologically
@@ -109,24 +101,24 @@ def render_intensity_trajectory(interactions: List[Dict[str, Any]]) -> Any:
     # Severity reference bands
     fig.add_hrect(
         y0=0.0, y1=0.35,
-        fillcolor="#F0FDF4", opacity=0.45, line_width=0,
-        annotation_text="Mild Zone (Optimal Range)",
+        fillcolor="#F0FDF4", opacity=0.5, line_width=0,
+        annotation_text="Mild Zone (Optimal)",
         annotation_position="top left",
-        annotation_font=dict(family=FONT_FAMILY, size=10, color="#183D35")
+        annotation_font=dict(family=FONT_FAMILY, size=10, color="#166534")
     )
     fig.add_hrect(
         y0=0.35, y1=0.65,
-        fillcolor="#F5F7F5", opacity=0.55, line_width=0,
-        annotation_text="Moderate Zone (Proactive Attention)",
+        fillcolor="#F0F9FF", opacity=0.5, line_width=0,
+        annotation_text="Moderate Zone (Managed)",
         annotation_position="top left",
-        annotation_font=dict(family=FONT_FAMILY, size=10, color="#2D6A4F")
+        annotation_font=dict(family=FONT_FAMILY, size=10, color="#0369A1")
     )
     fig.add_hrect(
         y0=0.65, y1=1.0,
-        fillcolor="#FFF1F2", opacity=0.45, line_width=0,
-        annotation_text="High / Critical Zone (Clinical Alert)",
+        fillcolor="#FFF1F2", opacity=0.5, line_width=0,
+        annotation_text="High / Critical Zone",
         annotation_position="top left",
-        annotation_font=dict(family=FONT_FAMILY, size=10, color="#B91C1C")
+        annotation_font=dict(family=FONT_FAMILY, size=10, color="#991B1B")
     )
 
     # Intensity trajectory spline curve
@@ -134,11 +126,11 @@ def render_intensity_trajectory(interactions: List[Dict[str, Any]]) -> Any:
         x=dates,
         y=intensities,
         mode="lines+markers",
-        line=dict(color=PALETTE["primary"], width=2.8, shape="spline"),
+        line=dict(color=PALETTE["primary"], width=3, shape="spline"),
         marker=dict(
-            size=7,
+            size=8,
             color=PALETTE["accent"],
-            line=dict(color="#FFFFFF", width=1.5)
+            line=dict(color="#FFFFFF", width=2)
         ),
         text=emotions,
         hovertemplate="<b>%{text}</b><br>Intensity: %{y:.2f}<br>Time: %{x}<extra></extra>",
@@ -182,11 +174,6 @@ def render_emotion_distribution(interactions: List[Dict[str, Any]]) -> Any:
             showarrow=False,
             font=dict(family=FONT_FAMILY, size=13, color=PALETTE["text_muted"])
         )
-        fig.update_layout(
-            paper_bgcolor='#FFFFFF',
-            plot_bgcolor='#FFFFFF',
-            height=280
-        )
         return fig
 
     emotion_counts: Dict[str, int] = {}
@@ -196,16 +183,16 @@ def render_emotion_distribution(interactions: List[Dict[str, Any]]) -> Any:
 
     labels = [k.capitalize() for k in emotion_counts.keys()]
     values = list(emotion_counts.values())
-    colors = [PALETTE.get(k.lower(), "#A8B9A5") for k in emotion_counts.keys()]
+    colors = [PALETTE.get(k.lower(), "#94A3B8") for k in emotion_counts.keys()]
 
     fig = go.Figure(data=[go.Pie(
         labels=labels,
         values=values,
-        hole=0.62,
+        hole=0.64,
         marker=dict(colors=colors, line=dict(color="#FFFFFF", width=2)),
-        textinfo="percent",
+        textinfo="percent+label",
         hoverinfo="label+value+percent",
-        textfont=dict(family=FONT_FAMILY, size=11, color=PALETTE["text_dark"])
+        textfont=dict(family=FONT_FAMILY, size=11)
     )])
 
     fig.update_layout(
@@ -214,19 +201,10 @@ def render_emotion_distribution(interactions: List[Dict[str, Any]]) -> Any:
             text="<b>Dominant Affect Distribution</b>",
             font=dict(size=14, color=PALETTE["text_dark"])
         ),
-        showlegend=True,
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=-0.22,
-            xanchor="center",
-            x=0.5,
-            font=dict(family=FONT_FAMILY, size=11, color=PALETTE["text_dark"])
-        ),
-        margin=dict(l=20, r=20, t=40, b=40),
+        showlegend=False,
+        margin=dict(l=25, r=25, t=45, b=25),
         paper_bgcolor='#FFFFFF',
-        plot_bgcolor='#FFFFFF',
-        height=320
+        height=270
     )
     return fig
 
@@ -234,11 +212,10 @@ def calculate_burnout_risk_index(interactions: List[Dict[str, Any]]) -> Tuple[in
     """
     Calculates dynamic Burnout Risk Index (0-100) based on:
     - Frequency of high negative emotions (Fear, Anger, Sadness)
-    - Intensity momentum over the past interactions
-    - Clinical triage severity level
+    - Intensity momentum over the past 5 interactions
     """
     if not interactions:
-        return 14, "Low Risk (Optimal)", PALETTE["primary_light"]
+        return 15, "Low", "#10B981"
 
     recent = interactions[:10]
     negative_count = sum(1 for i in recent if i["primary_emotion"] in ["fear", "anger", "sadness"])
@@ -249,10 +226,10 @@ def calculate_burnout_risk_index(interactions: List[Dict[str, Any]]) -> Tuple[in
     score = max(5, min(95, score))
 
     if score < 35:
-        return score, "Low Risk (Optimal Reserve)", PALETTE["primary_light"]
+        return score, "Low Risk (Healthy)", "#10B981"
     elif score < 65:
-        return score, "Moderate Risk (Needs Recovery)", PALETTE["surprise"]
+        return score, "Moderate Risk (Needs Attention)", "#0284C7"
     elif score < 85:
-        return score, "Elevated Burnout Exposure", PALETTE["accent"]
+        return score, "Elevated Burnout Risk", "#F59E0B"
     else:
-        return score, "Critical Exhaustion Alert", PALETTE["anger"]
+        return score, "Critical Exhaustion Alert", "#EF4444"
