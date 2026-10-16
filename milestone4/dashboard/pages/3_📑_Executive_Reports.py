@@ -29,8 +29,8 @@ apply_enterprise_theme("Executive Reports & PDF Hub — MoodMentor", "📑")
 render_top_navbar("Executive Telemetry & PDF Report Generation Hub")
 active_user = render_sidebar_context()
 
-exporter = ReportExporter()
 db = DatabaseManager()
+exporter = ReportExporter(db=db)
 history = db.get_user_interactions(active_user, limit=50)
 
 st.markdown("""

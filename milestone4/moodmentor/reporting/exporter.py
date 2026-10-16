@@ -10,8 +10,18 @@ from typing import List, Dict, Any, Optional
 from moodmentor.storage.db import DatabaseManager
 
 class ReportExporter:
-    def __init__(self, db: DatabaseManager):
-        self.db = db
+    def __init__(self, db: Optional[DatabaseManager] = None):
+        self.db = db if db is not None else DatabaseManager()
+
+    def export_user_report(self, user_id: str, output_path: str, format: str = "pdf",
+                           from_date: Optional[str] = None,
+                           to_date: Optional[str] = None) -> str:
+        """Universal export method supporting both PDF and CSV formats"""
+        if format.lower() == "csv":
+            return self.export_interactions_csv(user_id=user_id, output_path=output_path,
+                                                from_date=from_date, to_date=to_date)
+        return self.export_executive_pdf(user_id=user_id, output_path=output_path,
+                                         from_date=from_date, to_date=to_date)
 
     def export_interactions_csv(self, user_id: Optional[str], output_path: str,
                                 from_date: Optional[str] = None,

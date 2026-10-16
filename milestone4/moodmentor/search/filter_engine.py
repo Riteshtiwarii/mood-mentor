@@ -11,7 +11,7 @@ class FilterEngine:
     def __init__(self, db: Optional[DatabaseManager] = None):
         self.db = db
 
-    def search_interactions(self, db: DatabaseManager,
+    def search_interactions(self, db: Optional[DatabaseManager] = None,
                             user_id: Optional[str] = None,
                             keyword: Optional[str] = None,
                             emotion: Optional[str] = None,
@@ -23,6 +23,7 @@ class FilterEngine:
         """
         Filters user interactions by date range, emotion, intensity tier, triage, and text keyword.
         """
+        target_db = db if db is not None else (self.db if self.db is not None else DatabaseManager())
         query = "SELECT * FROM interactions WHERE 1=1"
         params: List[Any] = []
 
@@ -57,12 +58,12 @@ class FilterEngine:
         query += " ORDER BY timestamp DESC LIMIT ?"
         params.append(limit)
 
-        with db._get_connection() as conn:
+        with target_db._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute(query, tuple(params))
             return [dict(row) for row in cursor.fetchall()]
 
-    def search_recommendations(self, db: DatabaseManager,
+    def search_recommendations(self, db: Optional[DatabaseManager] = None,
                                user_id: Optional[str] = None,
                                modality: Optional[str] = None,
                                min_score: float = 0.0,
@@ -86,7 +87,8 @@ class FilterEngine:
         query += " ORDER BY timestamp DESC, score DESC LIMIT ?"
         params.append(limit)
 
-        with db._get_connection() as conn:
+        target_db = db if db is not None else (self.db if self.db is not None else DatabaseManager())
+        with target_db._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute(query, tuple(params))
             return [dict(row) for row in cursor.fetchall()]

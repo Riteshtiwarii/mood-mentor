@@ -83,7 +83,7 @@ filter_kwargs = {
     "limit": limit_records
 }
 
-results = filter_engine.search_interactions(**filter_kwargs)
+results = filter_engine.search_interactions(db=db, **filter_kwargs)
 query_latency = (time.time() - t0) * 1000
 
 # Results & Stats
