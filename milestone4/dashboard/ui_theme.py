@@ -20,7 +20,32 @@ QUIET_LUXURY_CSS = """
     }
 
     /* Streamlit Chrome adjustments */
-    #MainMenu, footer, header { visibility: hidden !important; }
+    #MainMenu, footer { visibility: hidden !important; }
+    header[data-testid="stHeader"] {
+        background-color: transparent !important;
+        z-index: 100 !important;
+    }
+    header[data-testid="stHeader"] [data-testid="stToolbar"] {
+        display: none !important;
+    }
+    [data-testid="collapsedControl"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 999999 !important;
+        background-color: #183D35 !important;
+        color: #F6F4EE !important;
+        border-radius: 8px !important;
+        padding: 5px 8px !important;
+        margin-left: 12px !important;
+        margin-top: 8px !important;
+        box-shadow: 0 2px 10px rgba(24, 61, 53, 0.25) !important;
+        cursor: pointer !important;
+    }
+    [data-testid="collapsedControl"] svg {
+        fill: #F6F4EE !important;
+        stroke: #F6F4EE !important;
+    }
     .block-container {
         padding-top: 1.2rem !important;
         padding-bottom: 3.5rem !important;
@@ -492,6 +517,17 @@ def apply_enterprise_theme(page_title: str = "MoodMentor AI — Enterprise", pag
         initial_sidebar_state="expanded"
     )
     st.markdown(QUIET_LUXURY_CSS, unsafe_allow_html=True)
+    # Auto-expand sidebar if browser persisted it in collapsed state
+    st.markdown("""
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+         onload="(function(){
+             try {
+                 var btn = window.parent.document.querySelector('[data-testid=\\'collapsedControl\\'] button') || window.parent.document.querySelector('[data-testid=\\'collapsedControl\\']');
+                 if(btn) { btn.click(); }
+             } catch(e) {}
+         })()"
+         style="display:none;" />
+    """, unsafe_allow_html=True)
 
 def render_top_navbar(current_view: str = "Clinical Copilot"):
     """Renders the executive top glassmorphic navbar with Quiet Luxury styling."""
